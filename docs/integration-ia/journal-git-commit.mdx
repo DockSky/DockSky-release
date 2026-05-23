@@ -121,6 +121,22 @@ Pour une utilisation en CI/CD ou dans un script automatisé, il est préférable
 
 ---
 
+## Installer les hooks sur une nouvelle machine
+
+Les hooks git sont **locaux** (dans `.git/hooks/`) et ne se poussent pas sur GitHub. Sur un nouveau poste ou après un `git clone`, il faut les réinstaller.
+
+Un script global gère ça en une commande depuis `~/projets/` :
+
+```bash
+bash ~/projets/install-git-hooks.sh
+```
+
+Au premier lancement, il demande tes credentials TDA et les stocke dans `~/.tda-credentials` (permissions `600`). Les lancements suivants réinstallent silencieusement les hooks dans tous les repos détectés.
+
+Les credentials ne sont **jamais** écrits dans les hooks eux-mêmes ni dans un fichier versionné.
+
+---
+
 ## Voir les entrées dans l'application
 
 Les entrées `git-commit` apparaissent dans la **vue Journal** de TDA Assistant UI, identifiables par leur emoji 🔧 et leur format `[repo@ref]`. Elles sont filtrables par projet.
