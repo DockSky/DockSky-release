@@ -1,0 +1,126 @@
+---
+sidebar_position: 4
+title: Journal & Commits Git
+---
+
+# 🔧 Alimenter le journal depuis Git
+
+L'endpoint `POST /tda/journal/git-commit` permet d'enregistrer automatiquement un commit git dans le **journal de bord** TDA Assistant. En combinant cela à un hook git `post-commit`, chaque push crée une entrée de journal sans aucune action manuelle.
+
+:::tip Pourquoi c'est utile pour un cerveau TDA
+Le TDA vit dans l'instant. Dans trois semaines, tu ne te souviendras plus pourquoi tu as fait ce commit. Le journal automatique construit une trace de tes décisions techniques sans effort, juste en travaillant normalement.
+:::
+
+---
+
+## Fonctionnement
+
+Quand tu envoies une requête à cet endpoint, une entrée est créée dans ton journal avec :
+
+- **Source** : `git-commit` (distingué des entrées manuelles ou IA)
+- **Tags** : `["git", "commit"]` automatiquement
+- **Format** : `🔧 [repo@abc12345] Message du commit (dd/mm/yyyy HH:MM)`
+
+Exemple d'entrée générée :
+
+```
+🔧 [docksky-api@c330602] Fix: enum journal_source manquait git-commit (23/05/2026 05:42)
+```
+
+---
+
+## Endpoint
+
+```
+POST https://api.docksky.fr/tda/journal/git-commit
+Authorization: Bearer <token>
+Content-Type: application/json
+```
+
+### Corps de la requête
+
+| Champ | Type | Obligatoire | Description |
+|-------|------|:-----------:|-------------|
+| `project_id` | integer | oui | ID du projet TDA |
+| `message` | string | oui | Texte explicatif (max 500 caractères) |
+| `commit_ref` | string | oui | Hash du commit (max 64 caractères) |
+| `commit_date` | datetime | oui | Date ISO 8601 du commit |
+| `repo` | string | non | Nom du dépôt (max 100 caractères) |
+
+### Réponse (201 Created)
+
+```json
+{
+  "id": 172,
+  "content": "🔧 [docksky-api@c330602] Fix: enum journal_source (23/05/2026 05:42)",
+  "source": "git-commit",
+  "tags": ["git", "commit"],
+  "project_id": 79,
+  "created_at": "2026-05-23T05:42:00"
+}
+```
+
+---
+
+## Hook git post-commit
+
+Crée le fichier `.git/hooks/post-commit` dans ton dépôt et rends-le exécutable :
+
+```bash
+chmod +x .git/hooks/post-commit
+```
+
+Contenu du hook :
+
+```bash
+#!/usr/bin/env bash
+set -euo pipefail
+
+TDA_USERNAME="ton-username"
+TDA_PASSWORD="ton-mot-de-passe"
+TDA_PROJECT_ID=79
+TDA_API="https://api.docksky.fr"
+
+# Récupérer le token
+TOKEN=$(curl -s -X POST "$TDA_API/auth/login" \
+  -d "username=$TDA_USERNAME" \
+  -d "password=$TDA_PASSWORD" \
+  | grep -o '"access_token":"[^"]*"' | cut -d'"' -f4)
+
+[ -z "$TOKEN" ] && exit 0  # Silencieux si pas de réseau
+
+REPO=$(basename "$(git rev-parse --show-toplevel)")
+REF=$(git rev-parse HEAD)
+MSG=$(git log -1 --pretty=%s)
+DATE=$(git log -1 --pretty=%cI)
+
+curl -s -X POST "$TDA_API/tda/journal/git-commit" \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d "{\"project_id\":$TDA_PROJECT_ID,\"message\":\"$MSG\",\"commit_ref\":\"$REF\",\"commit_date\":\"$DATE\",\"repo\":\"$REPO\"}" \
+  > /dev/null
+
+exit 0
+```
+
+:::note Le hook ne bloque jamais
+Le script se termine toujours avec `exit 0`. Si le réseau est absent ou l'API indisponible, le commit se fait normalement.
+:::
+
+---
+
+## Obtenir un token
+
+```bash
+curl -X POST https://api.docksky.fr/auth/login \
+  -d "username=ton-username" \
+  -d "password=ton-mot-de-passe"
+```
+
+Pour une utilisation en CI/CD ou dans un script automatisé, il est préférable de stocker les credentials dans des variables d'environnement ou un gestionnaire de secrets.
+
+---
+
+## Voir les entrées dans l'application
+
+Les entrées `git-commit` apparaissent dans la **vue Journal** de TDA Assistant UI, identifiables par leur emoji 🔧 et leur format `[repo@ref]`. Elles sont filtrables par projet.
