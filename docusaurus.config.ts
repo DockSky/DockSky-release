@@ -20,7 +20,7 @@ const config: Config = {
   baseUrl: '/',
 
   // GitHub pages deployment config.
-  organizationName: 'RobertManchon',
+  organizationName: 'DockSky',
   projectName: 'DockSky-release',
 
   onBrokenLinks: 'throw',
@@ -69,7 +69,7 @@ const config: Config = {
           label: 'Documentation',
         },
         {
-          href: 'https://github.com/RobertManchon/DockSky-release',
+          href: 'https://github.com/DockSky/DockSky-release',
           label: 'GitHub',
           position: 'right',
         },
@@ -89,7 +89,7 @@ const config: Config = {
           title: 'DockSky',
           items: [
             { label: 'Site officiel', href: 'https://docksky.fr' },
-            { label: 'GitHub', href: 'https://github.com/RobertManchon/DockSky-release' },
+            { label: 'GitHub', href: 'https://github.com/DockSky/DockSky-release' },
           ],
         },
       ],
