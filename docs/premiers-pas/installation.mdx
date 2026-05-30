@@ -5,15 +5,15 @@ title: Installation
 
 # Installation
 
-:::caution Accès anticipé — Windows uniquement pour l'instant
-DockSky est en **accès anticipé**. La version Windows est disponible dès maintenant. La version Linux est en préparation.
+:::caution Accès anticipé
+DockSky est en **accès anticipé**. Windows et Linux sont disponibles.
 
 Il peut exister des bugs ou des comportements inattendus. C'est normal à ce stade — tes retours nous aident directement à améliorer l'application.
 :::
 
 ## Ce dont tu as besoin
 
-- Un ordinateur sous **Windows 10 ou Windows 11**
+- Un ordinateur sous **Windows 10 / 11** ou **Linux x64** (Ubuntu 20.04+, Debian 11+ et dérivés)
 - Environ **200 Mo** d'espace disque libre
 - Une connexion internet pour le premier démarrage
 
@@ -21,19 +21,36 @@ Il peut exister des bugs ou des comportements inattendus. C'est normal à ce sta
 
 ## Télécharger DockSky
 
-Deux options selon ta préférence :
+### Windows
 
-### Option 1 — Installateur (recommandé)
+**Option 1 — Installateur (recommandé)**
 
-Télécharge et lance **`DockSky-win-Setup.exe`** — c'est la façon la plus simple. L'application s'installe en quelques secondes et se met à jour automatiquement par la suite.
+Télécharge et lance **`DockSky-Setup-*.exe`** — l'application s'installe en quelques secondes et se met à jour automatiquement.
 
-👉 **[Télécharger DockSky-win-Setup.exe](https://github.com/RobertManchon/DockSky-release/releases/latest/download/DockSky-win-Setup.exe)**
+👉 **[Dernière version Windows — GitHub Releases](https://github.com/DockSky/DockSky-release/releases/latest)**
 
-### Option 2 — Version portable (sans installation)
+**Option 2 — Version portable (sans installation)**
 
-Si tu préfères ne rien installer sur ton ordinateur, télécharge **`DockSky-win-Portable.zip`**, extrais l'archive où tu veux, et lance `TDAAssistant.exe` directement.
+Télécharge **`DockSky-win-Portable.zip`**, extrais l'archive où tu veux, et lance `DockSky.exe` directement.
 
-👉 **[Télécharger DockSky-win-Portable.zip](https://github.com/RobertManchon/DockSky-release/releases/latest/download/DockSky-win-Portable.zip)**
+### Linux
+
+**Option 1 — Paquet .deb (Ubuntu, Debian et dérivés)**
+
+```bash
+# Télécharge le .deb depuis la page releases puis installe-le :
+sudo dpkg -i docksky_*.deb
+```
+
+**Option 2 — Archive .tar.gz**
+
+```bash
+mkdir -p ~/DockSky && tar -xzf DockSky-linux-x64-*.tar.gz -C ~/DockSky
+chmod +x ~/DockSky/DockSky
+~/DockSky/DockSky
+```
+
+👉 **[Dernière version Linux — GitHub Releases](https://github.com/DockSky/DockSky-release/releases/latest)**
 
 ---
 
@@ -45,12 +62,6 @@ Quand tu es prêt, tu crées ton espace en quelques secondes.
 
 ---
 
-## Linux
-
-La version Linux est en préparation. Elle sera disponible dans une prochaine mise à jour.
-
----
-
 ## Un problème ?
 
-Si quelque chose ne fonctionne pas, [ouvre un ticket sur GitHub](https://github.com/RobertManchon/DockSky-release/issues) ou contacte-nous directement. Chaque retour compte.
+Si quelque chose ne fonctionne pas, [ouvre un ticket sur GitHub](https://github.com/DockSky/DockSky-release/issues) ou contacte-nous directement. Chaque retour compte.
