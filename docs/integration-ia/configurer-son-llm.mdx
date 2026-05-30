@@ -1,18 +1,75 @@
 ---
-sidebar_position: 2
-title: Configurer son LLM
+sidebar_position: 3
+title: Utiliser DockSky avec ton IA
 ---
 
-# Configurer son LLM avec DockSky
+# Utiliser DockSky avec ton IA
 
-:::note En cours de rédaction
-Documentation en cours de rédaction — cette section sera enrichie prochainement.
-:::
+DockSky fonctionne avec toutes les IA du marché : Claude, ChatGPT, Gemini, Copilot, Mistral, et n'importe quel autre outil qui accepte du texte en entrée. La procédure est la même pour tous.
 
-## Copier le JSON d'une Facette
+---
 
-## Avec Claude
+## Le principe
 
-## Avec ChatGPT
+Ton IA ne se souvient de rien entre deux conversations. DockSky stocke ton contexte (décisions, solutions, historique) et te permet de le transmettre à ton IA en quelques secondes, à chaque session.
 
-## Avec d'autres LLM
+Tu n'as pas besoin de comprendre comment ça fonctionne techniquement. Il te suffit de copier et coller.
+
+---
+
+## Méthode 1 — Copie rapide depuis les Facettes
+
+C'est la méthode la plus simple :
+
+1. Ouvre la vue **Facettes** d'un de tes projets
+2. Sélectionne la ou les Facettes qui contiennent le contexte utile
+3. Clique sur **Copier le contexte**
+4. Va dans Claude, ChatGPT, ou ton IA habituelle
+5. Colle en début de ta première message et commence à travailler
+
+Ton IA connaît maintenant tes décisions passées, tes solutions connues et l'état du projet.
+
+---
+
+## Méthode 2 — Contextes prédéfinis
+
+Si tu fais souvent le même type de session ("session d'écriture", "session de planification", "session technique"), tu peux préparer un **contexte prédéfini** une fois, et le réutiliser à chaque fois :
+
+1. Ouvre la vue **Contextes IA** dans le menu
+2. Crée un groupe (ex : "Session d'écriture chapitre")
+3. Coche les notes pertinentes dans tes Facettes
+4. La prochaine fois, ouvre ce groupe et clique **Copier** — c'est prêt
+
+→ Voir [Contextes IA](./contextes-ia) pour le détail.
+
+---
+
+## Méthode 3 — Lien automatique (avancé)
+
+Pour que ton IA récupère ton contexte automatiquement à chaque conversation, sans que tu ne fasses rien :
+
+→ Voir [Partage de contexte](./partage-contexte).
+
+---
+
+## Exemple concret avec Claude
+
+```
+[Tu colles le contexte copié depuis DockSky]
+
+Bonjour. Voilà le contexte de mon projet. 
+
+Quelle est la prochaine action prioritaire d'après ce que tu vois ?
+```
+
+Claude lit le contexte, répond directement sur la base de tes données réelles, sans que tu aies à tout réexpliquer.
+
+---
+
+## Ce que ton IA peut faire avec ce contexte
+
+- T'aider à débloquer une décision en connaissant les contraintes
+- Suggérer la prochaine action sans toi devoir résumé l'état du projet
+- Continuer là où vous vous êtiez arrêtés la veille
+- Respecter les décisions déjà prises (notées dans les DECISION)
+- Éviter les solutions que tu as déjà essayées (notées dans les TRAP)

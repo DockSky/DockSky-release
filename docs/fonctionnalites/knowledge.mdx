@@ -23,7 +23,7 @@ Le Knowledge Manager et les [Facettes](../concepts/facettes) coexistent, mais il
 |----------------------|-------------|
 | Base de connaissances **générale** | Mémoire structurée **par projet** |
 | Idées, recettes, procédures, bookmarks... | WORKS, TRAP, DECISION, TODO... |
-| Recherche fulltext, tags, thèmes | Organisée par projet, partageable avec l'IA |
+| Recherche dans tout le texte, tags, thèmes | Organisée par projet, partageable avec l'IA |
 | Usage personnel | Usage IA + co-pilote de projet |
 
 En pratique : une solution à un bug que tu veux partager avec ton IA → Facette. Une recette de cuisine ou une procédure SSH que tu veux retrouver toi-même → Knowledge.
@@ -102,7 +102,7 @@ L'entrée est créée immédiatement en statut `DRAFT`. Elle attend dans ta Know
 
 ## Rechercher une entrée
 
-La vue Knowledge propose une **recherche fulltext** sur le titre et le contenu de toutes tes entrées. Elle est rapide et ne nécessite pas de connaître les tags ou le thème exact.
+La vue Knowledge propose une **recherche libre** sur le titre et le contenu de toutes tes entrées. Elle est rapide et ne nécessite pas de connaître les tags ou le thème exact.
 
 Tu peux combiner la recherche avec des filtres :
 
@@ -135,7 +135,7 @@ Une entrée Knowledge peut être rattachée à un **projet** ou une **tâche** d
 
 ## Archivage
 
-Supprimer une entrée la passe en statut `ARCHIVED` (soft-delete). Elle n'apparaît plus dans les résultats par défaut, mais elle n't pas effacée. Tu peux la retrouver en activant le filtre `status=ARCHIVED` et la restaurer si besoin.
+Supprimer une entrée la place en archive. Elle n'apparaît plus dans les résultats par défaut, mais elle n'est pas effacée. Tu peux la retrouver en activant le filtre **Archivées** et la restaurer si besoin.
 
 Pour une suppression définitive, une option de hard-delete est disponible depuis le menu contextuel de l'entrée.
 
@@ -165,5 +165,5 @@ Capture rapide depuis le bandeau (5 secondes)
               ↓
         Passer en ACTIVE
               ↓
-  Retrouver via recherche fulltext ou filtres
+  Retrouver via recherche libre ou filtres
 ```

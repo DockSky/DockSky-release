@@ -5,17 +5,21 @@ title: Journal & Commits Git
 
 # 🔧 Alimenter le journal depuis Git
 
-L'endpoint `POST /tda/journal/git-commit` permet d'enregistrer automatiquement un commit git dans le **journal de bord** TDA Assistant. En combinant cela à un hook git `post-commit`, chaque push crée une entrée de journal sans aucune action manuelle.
+:::note Pour les développeurs
+Cette section s'adresse aux développeurs qui utilisent Git. Si tu ne sais pas ce que c'est, tu peux passer directement à la section [Journal de bord](../concepts/journal).
+:::
+
+Chaque fois que tu enregistres une étape de travail dans Git (un "commit"), DockSky peut créer automatiquement une entrée dans ton journal. Tu construis une trace de tes décisions techniques sans rien faire manuellement, juste en travaillant normalement.
 
 :::tip Pourquoi c'est utile pour un cerveau TDA
-Le TDA vit dans l'instant. Dans trois semaines, tu ne te souviendras plus pourquoi tu as fait ce commit. Le journal automatique construit une trace de tes décisions techniques sans effort, juste en travaillant normalement.
+Le TDA vit dans l'instant. Dans trois semaines, tu ne te souviendras plus pourquoi tu as fait tel changement. Le journal automatique construit une trace sans effort.
 :::
 
 ---
 
 ## Fonctionnement
 
-Quand tu envoies une requête à cet endpoint, une entrée est créée dans ton journal avec :
+Quand tu envoies la requête, une entrée est créée dans ton journal avec :
 
 - **Source** : `git-commit` (distingué des entrées manuelles ou IA)
 - **Tags** : `["git", "commit"]` automatiquement
@@ -139,4 +143,4 @@ Les credentials ne sont **jamais** écrits dans les hooks eux-mêmes ni dans un 
 
 ## Voir les entrées dans l'application
 
-Les entrées `git-commit` apparaissent dans la **vue Journal** de TDA Assistant UI, identifiables par leur emoji 🔧 et leur format `[repo@ref]`. Elles sont filtrables par projet.
+Les entrées apparaissent dans la **vue Journal** de DockSky, identifiables par leur emoji 🔧 et leur format `[repo@ref]`. Elles sont filtrables par projet.

@@ -32,30 +32,51 @@ Dans chaque Facette, tu crées des **entrées typées**.
 
 ### WORKS — ce qui marche
 
+**Pour un projet technique :**
 ```
-WORKS: ScrollViewer dans un StackPanel
-→ Mettre MaxHeight explicite sur le ScrollViewer, sinon expansion infinie.
-```
-
-Un `WORKS` n'est pas une note de satisfaction — c'est un **pattern validé** que tu pourras réutiliser et transmettre à ton IA sans réexplication.
-
-### TRAP — ce qui casse
-
-```
-TRAP: bool.ToString() en Avalonia retourne 'True'/'False' (Pascal case).
-→ Utiliser un converter ou un ternaire dans le ViewModel.
+WORKS: Exporter en PDF depuis le navigateur
+→ Fichier > Imprimer > Enregistrer en PDF. Fonctionne mieux que l'export natif.
 ```
 
-Un `TRAP` t'évite de retomber deux fois dans le même piège. Il évite aussi à ton IA de te suggérer la mauvaise solution.
+**Pour un roman :**
+```
+WORKS: Transition chapitre 3 → 4
+→ Plonger directement dans une scène d'action plutôt qu'un résumé. Ton retour de lecture de mai était positif.
+```
+
+Un `WORKS` n'est pas une note de satisfaction — c'est une **solution validée** que tu pourras réutiliser sans réfléchir.
+
+### TRAP — ce qui casse ou ne fonctionne pas
+
+**Pour un projet professionnel :**
+```
+TRAP: Envoyer une facture sans relire les coordonnées bancaires
+→ Le client X avait un IBAN obsolète en système. Vérifier à chaque nouvelle facture.
+```
+
+**Pour un roman :**
+```
+TRAP: Personnage secondaire Mika
+→ Son prénom était "Micka" jusqu'au chapitre 7 puis "Mika" après. Corriger dans toute la relecture.
+```
+
+Un `TRAP` t'empêche de refaire la même erreur. Il indique aussi à ton IA la solution à ne pas suggérer.
 
 ### DECISION — les choix actés
 
+**Pour un projet de design :**
 ```
-DECISION: IA dans DockSky = traitements semi-auto uniquement.
-Pas de fenêtre chat — intégration contextuelle invisible.
+DECISION: Palette de couleurs finale
+→ Marine + or + blanc cassé. Le gris avait été testé mais jugé trop froid par le client lors de la revue du 12 mars.
 ```
 
-Les décisions documentées évitent de remettre en cause indéfiniment les mêmes choix. Quand tu reviens sur un projet après une pause, tu retrouves le fil immédiatement.
+**Pour un projet perso :**
+```
+DECISION: Pas de réseaux sociaux pour ce projet avant la version finale
+→ Évite de disperser l'énergie créatrice avant d'avoir quelque chose de solide.
+```
+
+Les décisions documentées évitent de remettre en cause indfiniment les mêmes choix. Quand tu reviens sur un projet après une pause, tu retrouves le fil immédiatement.
 
 ---
 
@@ -63,7 +84,7 @@ Les décisions documentées évitent de remettre en cause indéfiniment les mêm
 
 :::info 1 titre = 1 sujet = 1 entrée
 
-Ne crée pas "Bug login v2", "Bug login mars 2026", "Bug login nouveau" — mets tout dans une seule entrée **"Bug login"** que tu enrichis au fil du temps.
+Ne crée pas "Problème livraison v2", "Problème livraison mars 2026", "Problème livraison nouveau" — mets tout dans une seule entrée **"Problème livraison"** que tu enrichis au fil du temps.
 
 L'historique reste lisible. La recherche reste efficace. Ton IA retrouve le bon contexte sans ambiguïté.
 
@@ -88,7 +109,7 @@ Quand tu veux brieffer ton IA avec le contenu d'une Facette :
 
 1. Ouvre la vue **Facettes** de ton projet
 2. Sélectionne la ou les Facettes pertinentes
-3. Clique sur **Copier JSON**
+3. Clique sur **Copier le contexte**
 4. Colle en début de conversation dans Claude, ChatGPT, ou autre
 
 Ton IA dispose immédiatement de tout le contexte : décisions passées, solutions validées, pièges connus, état d'avancement.
@@ -97,19 +118,27 @@ Pour une configuration permanente via lien de contexte, voir [Partage de context
 
 ---
 
-## Exemple de Facette
+## Exemples de Facettes
 
-**Facette "Bugs & Solutions" d'un projet de développement :**
+**Facette "Décisions & Choix" d'un projet de roman :**
 
 | Type | Titre | Contenu |
 |------|-------|---------|
-| `TRAP` | TextBox LostFocus | LostFocus = bouton Enregistrer inopérant. Fix : `UpdateSourceTrigger=PropertyChanged` sur tous les bindings TextBox. |
-| `WORKS` | Commands async MVVM | `[RelayCommand] async Task NomCommand()` — CommunityToolkit génère `NomCommand` + `IsNomRunning`. |
-| `DECISION` | Pas de chat IA | L'IA est semi-auto et invisible. Jamais de fenêtre de conversation. |
+| `DECISION` | Fin du tome 1 | La mort d'Irène est confirmée. Écartée l'option "coma" jugée trop facile lors de la relecture du 3 avril. |
+| `TRAP` | Chronologie chapitre 5-8 | Le chapitre 7 se passe 3 jours avant le chapitre 6 — attention à ne pas introduire de référence à cet événement trop tôt. |
+| `NOTE` | Inspirations Irène | Personnage inspiré de Marguerite Yourcenar + ex-colègue de recherche. Ton à la fois froid et poignant. |
+
+**Facette "Fournisseurs & Contacts" d'un projet freelance :**
+
+| Type | Titre | Contenu |
+|------|-------|---------|
+| `WORKS` | Imprimeur Dupont Express | Délai 48h, qualité correcte, tarif acceptable. Contact: marc@dupont.fr |
+| `TRAP` | Client Rossignol SARL | Toujours demander validation écrite avant de démarrer. Accord oral = problèmes de paiement (vécu en janvier). |
+| `DECISION` | Tarif journée 2026 | 550€ HT. Revu à la hausse après feedback colègues et inflation. |
 
 ---
 
 ## La Corbeille IA
 
 Si tu autorises DockSky à gérer ta mémoire, il peut marquer automatiquement les entrées obsolètes pour suppression.
-Elles passent en **corbeille** (soft-delete) — tu peux les consulter et les restaurer à tout moment. Voir [Corbeille IA](../fonctionnalites/corbeille).
+Elles passent en **corbeille** — tu peux les consulter et les restaurer à tout moment. Voir [Corbeille IA](../fonctionnalites/corbeille).

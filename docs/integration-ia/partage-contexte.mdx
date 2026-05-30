@@ -1,18 +1,62 @@
 ---
 sidebar_position: 1
-title: Partage de contexte
+title: Partage de contexte automatique
 ---
 
-# Partage de contexte
+# Partage de contexte automatique
 
-:::note En cours de rédaction
-Documentation en cours de rédaction — cette section sera enrichie prochainement.
-:::
+Plutôt que de copier-coller le contexte à chaque session, tu peux configurer ton IA pour qu'elle récupère ton contexte DockSky automatiquement à chaque conversation — sans aucune action de ta part.
 
-Chaque projet peut générer un **lien de contexte public** (`/ai/context/{share_token}`). Tu le configures une fois dans ton IA préférée — elle dispose ensuite de ton contexte à jour à chaque conversation.
+---
+
+## Comment ça fonctionne
+
+Quand tu actives l'accès IA sur un projet, DockSky génère un **lien unique** vers le contexte de ce projet. Tu configures ton IA préférée pour qu'elle consulte ce lien à chaque début de conversation.
+
+Le lien reste à jour automatiquement : quand tu modifies tes Facettes, l'IA dispose du nouveau contexte dès la prochaine conversation.
+
+---
 
 ## Activer l'accès IA sur un projet
 
-## Utiliser le share token
+1. Ouvre ton projet (vue **Projets**)
+2. Clique sur les paramètres du projet (icône ⚙️)
+3. Active l'option **Accès IA**
+4. Choisis le niveau d'accès :
+   - **Lecture** — ton IA peut lire les Facettes (recommandé)
+   - **Écriture** — ton IA peut aussi ajouter des notes
+5. Copie le **lien de contexte** généré
+
+---
+
+## Configurer Claude
+
+1. Va dans Claude → **Settings** → **Custom Instructions** (ou "Instructions système")
+2. Ajoute une instruction du type :
+
+```
+Début de chaque conversation : consulte mon contexte de projet à l'adresse [LIEN DOCKSKY].
+Base tes réponses sur ce contexte.
+```
+
+---
+
+## Configurer ChatGPT (Custom GPT)
+
+1. Crée un **Custom GPT** dans ChatGPT
+2. Dans les instructions, ajoute le lien DockSky et demande à GPT de le consulter
+3. Utilise ce GPT personnalisé pour tes sessions liées à ce projet
+
+---
 
 ## Révoquer l'accès
+
+Si tu veux révoquer l'accès (bloquer le lien existant et en générer un nouveau) :
+
+1. Ouvre les paramètres du projet
+2. Clique sur **Révoquer l'accès**
+3. Un nouveau lien est généré — l'ancien ne fonctionne plus
+
+:::caution
+Si tu as partagé ce lien avec quelqu'un ou configuré plusieurs outils avec, pense à mettre à jour chaque configuration après la révocation.
+:::

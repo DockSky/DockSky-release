@@ -29,7 +29,7 @@ Chaque note peut appartenir à **plusieurs groupes** à la fois. Tu ne dupplique
 
 ### 1. Ouvrir la vue Contextes IA
 
-Dans la barre latérale de TDA Assistant, clique sur **🤖 Contextes IA**.
+Dans le menu de DockSky, clique sur **🤖 Contextes IA**.
 
 ### 2. Sélectionner un projet
 
@@ -59,7 +59,7 @@ Dans le panneau de droite, clique sur **📋 Copier JSON**. Le contexte est main
 
 La **taille estimée** (en Ko) est affichée en couleur :
 - 🟢 Vert : léger, idéal
-- 🟠 Orange : attention à la fenêtre de contexte
+- 🟠 Orange : attention, l'IA risque de ne pas tout lire (limite de mémoire par session)
 - 🔴 Rouge : trop volumineux, affine ta sélection
 
 ---
@@ -92,12 +92,12 @@ Ce profil est global (pas lié à un projet) et sauvegardé sur le serveur. Le b
 
 ## Format du JSON exporté
 
-Le JSON généré suit une structure simple que n'importe quel LLM comprend :
+Le texte généré suit un format structuré que toutes les IA comprennent :
 
 ```json
 {
   "group": "Session backend",
-  "project": "TDA Assistant",
+  "project": "Mon projet",
   "generated_at": "2026-05-04T10:32:00Z",
   "user_profile": "Développeur solo TDA, réponses directes...",
   "facets": [
@@ -127,8 +127,8 @@ Le JSON généré suit une structure simple que n'importe quel LLM comprend :
 **Est-ce que mes notes sont envoyées à l'IA automatiquement ?**
 Non. L'export est manuel — tu copies le JSON et tu le colles toi-même dans ta session IA. Rien n'est transmis sans ton action.
 
-**Puis-je utiliser ce contexte avec n'importe quel LLM ?**
-Oui. Le JSON est du texte brut structuré. Il fonctionne avec Claude, ChatGPT, Gemini, Copilot, ou n'importe quel autre outil qui accepte du texte en entrée.
+**Puis-je utiliser ce contexte avec n'importe quelle IA ?**
+Oui. Le texte généré fonctionne avec Claude, ChatGPT, Gemini, Copilot, ou n'importe quel autre outil qui accepte du texte en entrée.
 
 **Que se passe-t-il si je supprime une note d'une facette ?**
 Elle est retirée de tous les groupes qui la contenaient. Le compteur de notes du groupe se met à jour au prochain export.

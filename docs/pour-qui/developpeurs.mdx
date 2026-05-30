@@ -5,8 +5,57 @@ title: Développeurs
 
 # DockSky pour les développeurs
 
-:::note En cours de rédaction
-Documentation en cours de rédaction — cette section sera enrichie prochainement.
-:::
+Contexte de projet toujours prêt pour ton IA, décisions techniques mémorisées, bugs connus documentés — et ton IA au courant de tout ça sans que tu réexpliques quoi que ce soit.
 
-Contexte de projet toujours chargé, décisions architecturales mémorisées, bugs connus documentés — et ton IA au courant de tout ça sans que tu rééxpliques quoi que ce soit.
+---
+
+## Le problème du dév solo
+
+Tu travailles avec Claude, ChatGPT ou Copilot. À chaque nouvelle conversation, tu réexpliques ton stack, ton architecture, tes conventions, les bugs connus. C'est de la friction pure — et ça prend facilement 5 à 10 minutes avant de pouvoir travailler vraiment.
+
+Avec DockSky, tu prépares ce contexte une fois, et tu le charges en quelques secondes à chaque session.
+
+---
+
+## Les Facettes pour ton code
+
+Crée un projet par base de code et organise la mémoire technique en [Facettes](../concepts/facettes) :
+
+| Facette | Ce qu'on y met |
+|---------|---------------|
+| **Contexte IA** | Stack, conventions, règles de collaboration avec l'IA |
+| **Décisions archi** | Pourquoi tu as fait ce choix plutôt qu'un autre |
+| **Bugs & solutions** | Ce qui a planté, ce qui a marché, comment c'était résolu |
+| **Accès & config** | Variables d'environnement, ports, commandes à connaître |
+
+**Avant une session avec ton IA :**
+1. Ouvre la vue Facettes
+2. Clique **Copier le contexte**
+3. Colle en début de conversation
+
+Ton IA connaît ton projet. Tu commences à travailler directement.
+
+---
+
+## Les Contextes IA pour les sessions types
+
+Si tu as différents types de sessions (backend, front, infra, documentation), les [Contextes IA](../integration-ia/contextes-ia) te permettent de préparer des "paquets" de contexte réutilisables :
+
+- *Session backend* → config BDD + conventions API + bugs connus
+- *Session déploiement* → commandes VPS + config serveur + pièges connus
+
+Tu chargesces le bon paquet selon le type de session. Zéro réexplication.
+
+---
+
+## Le Journal alimenté par Git
+
+Si tu utilises Git, chaque commit peut s'enregistrer automatiquement dans le [Journal de bord](../concepts/journal). Tu construis une trace de tes décisions techniques sans rien faire manuellement.
+
+Voir la section [Journal & Commits Git](../integration-ia/journal-git-commit) pour la mise en place (demande quelques minutes de configuration).
+
+---
+
+## Quick Wins pour les petites tâches techniques
+
+Les petites tâches techniques s'accumulent vite : corriger un warning, mettre à jour une dépendance, documenter une fonction. La [Roadmap](../fonctionnalites/roadmap) et les **Quick Wins** te permettent d'en enchaîner plusieurs pendant les creux de concentration, sans les perdre de vue.
