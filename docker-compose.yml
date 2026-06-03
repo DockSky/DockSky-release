@@ -1,0 +1,28 @@
+services:
+  docksky-docs:
+    image: nginx:alpine
+    container_name: docksky_docs
+    volumes:
+      - ./build:/usr/share/nginx/html:ro
+    networks:
+      - app-network
+    restart: unless-stopped
+    labels:
+      - traefik.enable=true
+      # HTTPS
+      - traefik.http.routers.docksky-docs.rule=Host(`docs.docksky.fr`)
+      - traefik.http.routers.docksky-docs.entrypoints=websecure
+      - traefik.http.routers.docksky-docs.tls=true
+      - traefik.http.routers.docksky-docs.tls.certresolver=myresolver
+      - traefik.http.routers.docksky-docs.service=docksky-docs@docker
+      - traefik.http.services.docksky-docs.loadbalancer.server.port=80
+      # HTTP → HTTPS redirect
+      - traefik.http.routers.docksky-docs-insecure.rule=Host(`docs.docksky.fr`)
+      - traefik.http.routers.docksky-docs-insecure.entrypoints=web
+      - traefik.http.routers.docksky-docs-insecure.middlewares=redirect-to-https@docker
+      - traefik.http.routers.docksky-docs-insecure.service=docksky-docs@docker
+
+networks:
+  app-network:
+    external: true
+    name: infra_app-network
