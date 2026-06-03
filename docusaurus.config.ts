@@ -51,7 +51,7 @@ const config: Config = {
 
   themeConfig: {
     // Replace with your project's social card
-    image: 'img/docusaurus-social-card.jpg',
+    image: 'img/docusaurus-social-card.jpg', // og-image DockSky
     colorMode: {
       respectPrefersColorScheme: true,
     },
@@ -59,7 +59,7 @@ const config: Config = {
       title: 'DockSky Docs',
       logo: {
         alt: 'DockSky',
-        src: 'img/logo.svg',
+        src: 'img/logo.png',
       },
       items: [
         {
