@@ -1,0 +1,194 @@
+---
+sidebar_position: 7
+title: Synapse et MCP (Cursor)
+---
+
+# Synapse et MCP (Cursor / VS Code)
+
+Synapse s'utilise principalement via le **protocole MCP** (Model Context Protocol). Ton IA dans Cursor ou VS Code appelle des outils DockSky pour lister tes machines, lire les noms de secrets et **exécuter des commandes** — sans jamais recevoir les mots de passe.
+
+---
+
+## Étape 1 — Générer un token IA
+
+1. **Menu Vue → Paramètres**
+2. Section **Accès IA** (🤖)
+3. Clique **Générer un token**
+4. **Copie le token immédiatement** — il commence par `dk_ai_` et ne sera plus affiché
+
+Caractéristiques du token généré par l'app :
+- **Quota** : 500 appels par jour
+- **Validité** : 90 jours
+- **Un seul token actif** à la fois (un nouveau token révoque l'ancien)
+
+:::warning Ne partage jamais ton token
+Quiconque possède ton token peut agir sur tes données DockSky dans la limite de ses scopes. En cas de fuite, révoque-le dans Paramètres ou utilise le kill switch d'urgence (voir ci-dessous).
+:::
+
+---
+
+## Étape 2 — Configurer Cursor ou VS Code
+
+Crée ou modifie le fichier de configuration MCP :
+
+**Cursor** : `.cursor/mcp.json` à la racine du projet  
+**VS Code** : `.vscode/mcp.json`
+
+```json
+{
+  "servers": {
+    "docksky": {
+      "type": "http",
+      "url": "https://api.docksky.fr/tda/mcp",
+      "headers": {
+        "X-AI-Token": "dk_ai_VOTRE_TOKEN_ICI"
+      }
+    }
+  }
+}
+```
+
+:::important Header d'authentification
+Utilise **`X-AI-Token`**, pas `Authorization: Bearer`. C'est le header attendu par l'API DockSky MCP.
+:::
+
+Redémarre Cursor ou recharge la fenêtre VS Code pour que le serveur MCP soit détecté.
+
+---
+
+## Étape 3 — Préparer Synapse
+
+Avant de demander à l'IA d'exécuter quoi que ce soit :
+
+1. Plan **Pro** actif
+2. Secrets enregistrés dans le **Coffre Pilotage IA**
+3. Au moins une **machine** configurée
+
+→ Voir [Secrets et machines](./synapse-secrets-et-machines)
+
+---
+
+## Outils MCP Synapse disponibles
+
+Endpoint : `POST https://api.docksky.fr/tda/mcp` (JSON-RPC : `tools/list`, `tools/call`)
+
+### Lecture (`mcp:read`)
+
+Accessibles avec le token généré par défaut dans l'app :
+
+| Outil | Description |
+|-------|-------------|
+| `synapse_list_machines` | Liste tes machines (slug, conteneurs, statut) |
+| `synapse_get_machine` | Détail d'une machine par slug |
+| `synapse_list_secrets` | Noms des secrets (sans valeurs) |
+| `synapse_list_audit_logs` | Journal des exécutions (limit max 200) |
+
+### Écriture et exécution (`mcp:synapse`)
+
+Requièrent le scope **`mcp:synapse`** en plus du plan Pro :
+
+| Outil | Description |
+|-------|-------------|
+| `synapse_create_machine` | Crée une machine |
+| `synapse_update_machine` | Met à jour label, conteneurs, statut… |
+| `synapse_delete_machine` | Supprime une machine |
+| `synapse_exec` | **Exécute une commande shell** |
+
+### Paramètres de `synapse_exec`
+
+| Paramètre | Requis | Description |
+|-----------|--------|-------------|
+| `machine` | Oui | Slug de la machine (ex. `docksky-vps`) |
+| `command` | Oui | Commande shell avec `{{SECRET}}` si besoin |
+| `container` | Non | Conteneur (défaut : `default_container` de la machine) |
+| `timeout_seconds` | Non | 1–300 s, défaut 30 |
+
+Exemple d'appel (conceptuel) :
+
+```json
+{
+  "name": "synapse_exec",
+  "arguments": {
+    "machine": "docksky-vps",
+    "command": "echo synapse_ok && hostname",
+    "timeout_seconds": 15
+  }
+}
+```
+
+---
+
+## Scopes du token IA
+
+Le token généré dans **Paramètres → Accès IA** a par défaut le scope **`mcp:read`** uniquement.
+
+| Scope | Outils débloqués |
+|-------|------------------|
+| `mcp:read` | Contexte TDA, facettes, `synapse_list_*` |
+| `mcp:synapse` | `synapse_exec`, `synapse_create/update/delete_machine` |
+
+:::caution Limitation actuelle
+**`synapse_exec` n'est pas accessible** avec le token par défaut de l'app : il manque le scope `mcp:synapse`. L'interface ne permet pas encore de choisir les scopes à la génération.
+
+**Solutions aujourd'hui :**
+- Contacter le support DockSky pour activer `mcp:synapse` sur ton token
+- Utiliser les outils de **lecture** (`synapse_list_secrets`, `synapse_list_machines`) pour que l'IA prépare les commandes — tu les exécutes toi-même en attendant
+
+Une évolution produit permettra bientôt de cocher « Pilotage IA » à la génération du token.
+:::
+
+---
+
+## Exemple de session avec Cursor
+
+Une fois MCP configuré et le scope `mcp:synapse` actif :
+
+```
+Toi : Liste mes machines Synapse et les secrets disponibles.
+
+IA  : [appelle synapse_list_machines et synapse_list_secrets]
+
+Toi : Sur docksky-vps, vérifie que MySQL répond avec les secrets du coffre.
+
+IA  : [appelle synapse_exec avec une commande utilisant {{DB_USER}} et {{DB_PASS}}]
+```
+
+Tu retrouves l'exécution dans **Paramètres → Journal Synapse**.
+
+---
+
+## Rate limiting
+
+Synapse limite les exécutions à **30 par minute** par utilisateur (par défaut). Au-delà, l'API renvoie HTTP **429** avec un header `Retry-After`.
+
+---
+
+## Révocation et urgence
+
+| Situation | Action |
+|-----------|--------|
+| Révocation normale | **Paramètres → Accès IA → Révoquer le token** |
+| Fuite de token, urgence | `POST https://api.docksky.fr/tda/ai/tokens/emergency-revoke?token=dk_ai_…` (sans login — le token lui-même suffit) |
+
+---
+
+## Erreurs fréquentes
+
+| Message | Cause probable |
+|---------|----------------|
+| `Pilotage IA Synapse réservé au plan Pro` | Plan gratuit — passe au Pro |
+| `Secret manquant pour le placeholder {{X}}` | Secret non enregistré dans le coffre |
+| `Machine introuvable` | Slug incorrect ou machine supprimée |
+| `Conteneur non autorisé` | Conteneur absent de la liste de la machine |
+| `Synapse rate limit exceeded` | Trop d'exec en 1 minute — attends 60 s |
+| Outil `synapse_exec` absent de `tools/list` | Scope `mcp:synapse` manquant sur le token |
+| `Quota journalier IA atteint` | 500 appels MCP/jour dépassés — attends le lendemain |
+
+---
+
+## Voir aussi
+
+- [Vue d'ensemble Pilotage IA](./pilotage-ia-synapse)
+- [Secrets et machines](./synapse-secrets-et-machines)
+- [Utiliser DockSky avec ton IA](./configurer-son-llm) — méthodes copier-coller et contexte
+- [Partage de contexte](./partage-contexte) — contexte TDA sans MCP

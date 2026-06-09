@@ -59,3 +59,25 @@ Voir la section [Journal & Commits Git](../integration-ia/journal-git-commit) po
 ## Quick Wins pour les petites tâches techniques
 
 Les petites tâches techniques s'accumulent vite : corriger un warning, mettre à jour une dépendance, documenter une fonction. La [Roadmap](../fonctionnalites/roadmap) et les **Quick Wins** te permettent d'en enchaîner plusieurs pendant les creux de concentration, sans les perdre de vue.
+
+---
+
+## Pilotage IA — exécuter sans coller de MDP dans le chat
+
+Pour les sessions infra (VPS, Docker, MySQL), DockSky intègre **Synapse** (affiché **Pilotage IA** dans l'app) :
+
+- Tu stockes tes secrets dans un **coffre personnel** (`DB_USER`, `DB_PASS`…)
+- Tu déclares une **machine** avec les conteneurs autorisés
+- Ton IA dans **Cursor** appelle `synapse_exec` via MCP avec des placeholders `{{DB_PASS}}` — jamais le mot de passe en clair
+- Tu consultes le **journal** dans Paramètres pour vérifier ce qui a été exécuté
+
+**Prérequis :** plan Pro DockSky App + token IA + configuration MCP.
+
+| Étape | Où |
+|-------|-----|
+| Enregistrer les secrets | Paramètres → Coffre Pilotage IA |
+| Déclarer la machine | Paramètres → Mes machines Synapse |
+| Connecter Cursor | Paramètres → Accès IA + [config MCP](../integration-ia/synapse-mcp-cursor) |
+| Voir les exécutions | Paramètres → Journal Synapse |
+
+→ [Documentation Pilotage IA](../integration-ia/pilotage-ia-synapse)

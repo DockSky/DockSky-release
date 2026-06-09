@@ -68,6 +68,33 @@ Configuration des notifications système et des alertes :
 - **Autorisation de suppression IA** par projet (voir aussi [Corbeille IA](./corbeille))
 - **Profil IA** — texte injecté en tête de chaque export de contexte
 
+### Accès IA (token MCP)
+
+Section **🤖 Accès IA** — en bas de la page Paramètres :
+
+- Génère un **token IA** (`dk_ai_…`) pour connecter Cursor ou VS Code au serveur MCP DockSky
+- Quota : 500 appels/jour, validité 90 jours
+- Le token complet n'est affiché **qu'une seule fois** à la génération — copie-le immédiatement
+- **Révoquer** désactive le token actif
+
+→ Configuration MCP : [Synapse et MCP (Cursor)](../integration-ia/synapse-mcp-cursor)
+
+### Pilotage IA (Synapse)
+
+Sections disponibles avec un **plan Pro** DockSky App (`pro` ou `personal`) :
+
+| Section | Rôle |
+|---------|------|
+| **🔐 Coffre Pilotage IA** | Secrets personnels référencés par `{{NOM}}` dans les commandes — valeurs jamais affichées |
+| **🖥️ Mes machines Synapse** | Profils d'exécution (slug, conteneurs autorisés) pour `synapse_exec` |
+| **📋 Journal Synapse** | 30 dernières exécutions IA — stdout masqué, lecture seule |
+
+Sans plan Pro, ces sections sont grisées et une bannière indique la mise à niveau nécessaire.
+
+L'app ne propose **pas** de bouton pour exécuter des commandes : l'exécution passe par l'IA (MCP) ou l'API. L'app sert à configurer et surveiller.
+
+→ Documentation complète : [Pilotage IA (Synapse)](../integration-ia/pilotage-ia-synapse)
+
 ---
 
 ## Compte
