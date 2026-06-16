@@ -1,41 +1,62 @@
-# Website
+# DockSky — Documentation (Docusaurus)
 
-This website is built using [Docusaurus](https://docusaurus.io/), a modern static website generator.
+Site public : **https://docs.docksky.fr**
 
-## Installation
-
-```bash
-yarn
-```
-
-## Local Development
+## Développement local
 
 ```bash
-yarn start
+npm ci
+npm start          # http://localhost:3000
 ```
-
-This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
 
 ## Build
 
 ```bash
-yarn build
+npm run build      # génère build/
 ```
 
-This command generates static content into the `build` directory and can be served using any static contents hosting service.
+## Déploiement
 
-## Deployment
+### Automatique (recommandé)
 
-Using SSH:
+À chaque **push sur `main`** (fichiers docs/sources), GitHub Actions :
+
+1. `npm ci && npm run build`
+2. `rsync` du dossier `build/` vers le VPS (`docksky_docs` / nginx)
+
+**Secrets GitHub à configurer** (repo `DockSky/DockSky-release` → Settings → Secrets) :
+
+| Secret | Valeur |
+|--------|--------|
+| `VPS_HOST` | IP ou hostname du VPS (ex. `141.95.162.159`) |
+| `VPS_SSH_PRIVATE_KEY` | Clé privée SSH (deploy key) avec accès `debian@VPS` |
+| `VPS_USER` | Optionnel, défaut `debian` |
+
+Générer une clé dédiée (sur ta machine) :
 
 ```bash
-USE_SSH=true yarn deploy
+ssh-keygen -t ed25519 -f ~/.ssh/docksky-docs-deploy -N ""
+ssh-copy-id -i ~/.ssh/docksky-docs-deploy.pub debian@<VPS>
+# Coller le contenu de ~/.ssh/docksky-docs-deploy dans le secret VPS_SSH_PRIVATE_KEY
 ```
 
-Not using SSH:
+Workflow : `.github/workflows/deploy-docs.yml`
+
+### Manuel (immédiat)
 
 ```bash
-GIT_USER=<Your GitHub username> yarn deploy
+./deploy.sh                 # build local + rsync VPS
+./deploy.sh --push-only     # push seulement → CI déploie
+./deploy.sh --first-time    # premier clone sur VPS
 ```
 
-If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.
+### Infra VPS
+
+| Élément | Valeur |
+|---------|--------|
+| Chemin | `/home/debian/docker/docksky-docs` |
+| Conteneur | `docksky_docs` (nginx:alpine) |
+| Volume | `./build` → `/usr/share/nginx/html` |
+| Réseau | `infra_app-network` (Traefik) |
+
+Le dossier `build/` reste versionné pour repli manuel (`git pull` sur le VPS), mais le déploiement CI utilise **rsync** sans rebuild sur le serveur.
