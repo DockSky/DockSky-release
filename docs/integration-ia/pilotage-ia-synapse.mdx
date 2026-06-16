@@ -63,7 +63,7 @@ L'exécution passe par l'IA connectée en MCP (`synapse_exec`) ou par l'API REST
 
 ## Prérequis
 
-1. **Plan Pro DockSky App** (`pro` ou `personal`) — requis pour créer des secrets, des machines et exécuter des commandes
+1. **Plan Pro DockSky App** (`pro`) — requis pour créer des secrets, des machines et exécuter des commandes
 2. **Token IA** généré dans Paramètres → Accès IA
 3. **Au moins une machine** enregistrée avec des conteneurs autorisés
 4. **Secrets** dans le coffre pour chaque placeholder utilisé dans les commandes
@@ -79,7 +79,7 @@ Sans plan Pro, les sections Pilotage IA sont grisées et une bannière t'indique
 3. **Paramètres → Coffre Pilotage IA** : enregistre `DB_USER`, `DB_PASS`, etc.
 4. **Paramètres → Mes machines Synapse** : crée une machine (ex. slug `docksky-vps`, conteneurs `docksky_api_dev`)
 5. Configure **Cursor** ou **VS Code** avec le serveur MCP DockSky → voir [Synapse et MCP](./synapse-mcp-cursor)
-6. Demande à ton IA d'exécuter une commande de test
+6. Demande à ton IA : *« Liste les bases MySQL sur docksky-vps (conteneur ctn_mysql) avec le secret MYSQL_ROOT »* — voir [exemple détaillé](./synapse-mcp-cursor#exemple-concret--lister-les-bases-mysql)
 7. Vérifie le résultat dans **Journal Synapse**
 
 ---
@@ -109,8 +109,8 @@ Sans plan Pro, les sections Pilotage IA sont grisées et une bannière t'indique
 | Sujet | État actuel |
 |-------|-------------|
 | Exécution depuis l'app | Non — MCP ou API uniquement |
-| Machines type `agent` (VPS distant) | API/MCP seulement, pas encore dans l'UI app |
-| Scope `mcp:synapse` sur le token IA | Non configurable dans l'app — voir [Synapse et MCP](./synapse-mcp-cursor#scopes-du-token-ia) |
+| Machines type `agent` (VPS distant) | Configurables dans l'app (token agent one-shot à la création) |
+| Scopes sur le token IA | Affichés dans Paramètres → Accès IA ; Pro inclut `mcp:synapse` |
 | Plan gratuit | Lecture API possible ; écriture et exec bloquées (403) |
 
 ---

@@ -92,6 +92,8 @@ Requièrent le scope **`mcp:synapse`** en plus du plan Pro :
 | `synapse_create_machine` | Crée une machine |
 | `synapse_update_machine` | Met à jour label, conteneurs, statut… |
 | `synapse_delete_machine` | Supprime une machine |
+| `synapse_put_secret` | Enregistre ou met à jour un secret dans le coffre |
+| `synapse_delete_secret` | Supprime un secret du coffre |
 | `synapse_exec` | **Exécute une commande shell** |
 
 ### Paramètres de `synapse_exec`
@@ -103,7 +105,7 @@ Requièrent le scope **`mcp:synapse`** en plus du plan Pro :
 | `container` | Non | Conteneur (défaut : `default_container` de la machine) |
 | `timeout_seconds` | Non | 1–300 s, défaut 30 |
 
-Exemple d'appel (conceptuel) :
+Exemple minimal :
 
 ```json
 {
@@ -118,24 +120,100 @@ Exemple d'appel (conceptuel) :
 
 ---
 
+## Exemple concret : lister les bases MySQL
+
+Cas réel testé en production : l'IA interroge MySQL sur ton VPS **sans jamais voir** le mot de passe root.
+
+### Prérequis
+
+| Élément | Exemple |
+|---------|---------|
+| Secret dans le coffre | `MYSQL_ROOT` |
+| Machine (slug) | `docksky-vps` |
+| Conteneur autorisé | `ctn_mysql` |
+
+La commande s'exécute **dans** le conteneur (`docker exec` est géré par Synapse côté serveur). Tu n'as pas à préfixer `docker exec …` dans `command`.
+
+### Appel MCP (JSON-RPC)
+
+`POST https://api.docksky.fr/tda/mcp` avec header `X-AI-Token: dk_ai_…`
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "method": "tools/call",
+  "params": {
+    "name": "synapse_exec",
+    "arguments": {
+      "machine": "docksky-vps",
+      "container": "ctn_mysql",
+      "command": "mysql -uroot -p\"{{MYSQL_ROOT}}\" -e \"SHOW DATABASES\""
+    }
+  }
+}
+```
+
+### La commande shell (placeholders)
+
+```bash
+mysql -uroot -p"{{MYSQL_ROOT}}" -e "SHOW DATABASES"
+```
+
+:::tip Guillemets autour du secret
+Si ton mot de passe contient des caractères spéciaux shell (`&`, `!`, espaces…), **entoure le placeholder de guillemets doubles** : `-p"{{MYSQL_ROOT}}"`. Sans guillemets, `sh` peut interpréter une partie du MDP comme une commande séparée.
+:::
+
+### Réponse typique (extrait)
+
+```json
+{
+  "success": true,
+  "exit_code": 0,
+  "stdout": "Database\napollo\ndocksky_api\ntda_assistant\n…",
+  "machine": "docksky-vps",
+  "container": "ctn_mysql",
+  "command_template": "mysql -uroot -p\"{{MYSQL_ROOT}}\" -e \"SHOW DATABASES\""
+}
+```
+
+Le champ `command_template` est ce qui est journalisé — **jamais** la valeur résolue de `MYSQL_ROOT`.
+
+### Équivalent API REST (hors MCP)
+
+```bash
+curl -sS -X POST 'https://api.docksky.fr/synapse/exec' \
+  -H "Authorization: Bearer $TOKEN_JWT" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "machine": "docksky-vps",
+    "container": "ctn_mysql",
+    "command": "mysql -uroot -p\"{{MYSQL_ROOT}}\" -e \"SHOW DATABASES\""
+  }'
+```
+
+---
+
 ## Scopes du token IA
 
-Le token généré dans **Paramètres → Accès IA** a par défaut le scope **`mcp:read`** uniquement.
+À la génération dans **Paramètres → Accès IA**, les scopes sont **calculés selon ton plan** et affichés dans l'app :
+
+| Plan | Scopes typiques |
+|------|-----------------|
+| Free / Plus | `mcp:read` |
+| **Pro** | `mcp:read`, `mcp:write`, **`mcp:synapse`** |
 
 | Scope | Outils débloqués |
 |-------|------------------|
 | `mcp:read` | Contexte TDA, facettes, `synapse_list_*` |
-| `mcp:synapse` | `synapse_exec`, `synapse_create/update/delete_machine` |
+| `mcp:write` | `update_*`, `add_*` sur la base TDA |
+| `mcp:synapse` | `synapse_exec`, machines, secrets (`synapse_put/delete_secret`…) |
 
-:::caution Limitation actuelle
-**`synapse_exec` n'est pas accessible** avec le token par défaut de l'app : il manque le scope `mcp:synapse`. L'interface ne permet pas encore de choisir les scopes à la génération.
-
-**Solutions aujourd'hui :**
-- Contacter le support DockSky pour activer `mcp:synapse` sur ton token
-- Utiliser les outils de **lecture** (`synapse_list_secrets`, `synapse_list_machines`) pour que l'IA prépare les commandes — tu les exécutes toi-même en attendant
-
-Une évolution produit permettra bientôt de cocher « Pilotage IA » à la génération du token.
+:::info Token Pro = Synapse actif
+Avec un plan **Pro**, régénère ton token une fois si tu l'avais créé avant l'activation des scopes persistés. Tu dois voir `mcp:synapse` dans Paramètres → Accès IA, et `synapse_exec` dans `tools/list` côté Cursor.
 :::
+
+Tu peux aussi passer des scopes explicites à la création via l'API `POST /tda/ai/tokens` (champ `scopes`).
 
 ---
 
@@ -148,9 +226,9 @@ Toi : Liste mes machines Synapse et les secrets disponibles.
 
 IA  : [appelle synapse_list_machines et synapse_list_secrets]
 
-Toi : Sur docksky-vps, vérifie que MySQL répond avec les secrets du coffre.
+Toi : Sur docksky-vps, liste les bases MySQL du conteneur ctn_mysql avec le secret MYSQL_ROOT.
 
-IA  : [appelle synapse_exec avec une commande utilisant {{DB_USER}} et {{DB_PASS}}]
+IA  : [appelle synapse_exec avec mysql -uroot -p"{{MYSQL_ROOT}}" -e "SHOW DATABASES"]
 ```
 
 Tu retrouves l'exécution dans **Paramètres → Journal Synapse**.
@@ -159,7 +237,14 @@ Tu retrouves l'exécution dans **Paramètres → Journal Synapse**.
 
 ## Rate limiting
 
-Synapse limite les exécutions à **30 par minute** par utilisateur (par défaut). Au-delà, l'API renvoie HTTP **429** avec un header `Retry-After`.
+| Limite | Valeur |
+|--------|--------|
+| Exécutions Synapse | **30 / minute** par utilisateur |
+| Appels MCP (IP normale) | 200 / minute |
+| Appels MCP (IP de confiance) | 400 / minute — après un premier appel MCP valide avec ton token, ton IP est mémorisée **24 h** dans Redis (whitelist temporaire, pas d'auto-ban sur le trafic MCP) |
+| Quota token IA | 500 / jour par défaut (configurable à la création) |
+
+Au-delà, l'API renvoie HTTP **429** avec `Retry-After`.
 
 ---
 
