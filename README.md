@@ -32,12 +32,16 @@ npm run build      # génère build/
 | `VPS_SSH_PRIVATE_KEY` | Clé privée SSH (deploy key) avec accès `debian@VPS` |
 | `VPS_USER` | Optionnel, défaut `debian` |
 
-Générer une clé dédiée (sur ta machine) :
+Clé dédiée (déjà en place sur le VPS : `github-actions@docksky`) :
 
 ```bash
-ssh-keygen -t ed25519 -f ~/.ssh/docksky-docs-deploy -N ""
-ssh-copy-id -i ~/.ssh/docksky-docs-deploy.pub debian@<VPS>
-# Coller le contenu de ~/.ssh/docksky-docs-deploy dans le secret VPS_SSH_PRIVATE_KEY
+# Si besoin de recréer :
+ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519_github_actions -N "" -C "github-actions@docksky"
+ssh-copy-id -i ~/.ssh/id_ed25519_github_actions.pub debian@141.95.162.159
+
+# Secret GitHub VPS_SSH_PRIVATE_KEY = contenu de la clé PRIVÉE (pas le .pub) :
+gh secret set VPS_SSH_PRIVATE_KEY -R DockSky/DockSky-release < ~/.ssh/id_ed25519_github_actions
+gh secret set VPS_HOST -R DockSky/DockSky-release -b "141.95.162.159"
 ```
 
 Workflow : `.github/workflows/deploy-docs.yml`
