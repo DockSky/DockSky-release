@@ -63,7 +63,7 @@ La réponse inclut `agent_token` — **copie-le immédiatement**, il ne sera plu
 
 ## Installer l'agent sur le serveur distant
 
-Le script est dans le dépôt `docksky-api` : `scripts/synapse_agent.py`.
+Le script est dans le dépôt `docksky-api` : `scripts/synapse/agent.py`.
 
 ```bash
 export SYNAPSE_API_URL=https://api.docksky.fr
@@ -71,7 +71,7 @@ export SYNAPSE_AGENT_TOKEN=<agent_token reçu à la création>
 # Optionnel : intervalle de poll (défaut 3 s)
 export SYNAPSE_AGENT_POLL_SECONDS=3
 
-python3 scripts/synapse_agent.py
+python3 scripts/synapse/agent.py
 ```
 
 L'agent :
