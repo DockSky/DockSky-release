@@ -31,24 +31,37 @@ Télécharge et lance **`DockSky-Setup-*.exe`** — l'application s'installe en 
 
 **Option 2 — Version portable (sans installation)**
 
-Télécharge **`DockSky-win-Portable.zip`**, extrais l'archive où tu veux, et lance `DockSky.exe` directement.
+Télécharge **`DockSky-win-Portable.zip`**, extrais l'archive où tu veux, et lance `DockSky.exe` directement. Pas de mise à jour automatique.
 
 ### Linux
 
-**Option 1 — Paquet .deb (Ubuntu, Debian et dérivés)**
+**Option 1 — Snap (Ubuntu, recommandé)**
 
 ```bash
-# Télécharge le .deb depuis la page releases puis installe-le :
-sudo dpkg -i docksky_*.deb
+sudo snap install docksky
 ```
 
-**Option 2 — Archive .tar.gz**
+Mises à jour automatiques via le Snap Store. Idéal pour Ubuntu et dérivés.
+
+👉 **[DockSky sur Snap Store](https://snapcraft.io/docksky)**
+
+**Option 2 — AppImage (toutes les distros)**
+
+Télécharge **`DockSky.AppImage`** depuis GitHub Releases, rends-le exécutable et lance-le :
 
 ```bash
-mkdir -p ~/DockSky && tar -xzf DockSky-linux-x64-*.tar.gz -C ~/DockSky
-chmod +x ~/DockSky/DockSky
-~/DockSky/DockSky
+chmod +x DockSky.AppImage && ./DockSky.AppImage
 ```
+
+Mise à jour automatique intégrée (Velopack).
+
+**Option 3 — Script d'installation**
+
+```bash
+curl -fsSL https://docksky.fr/install.sh | bash
+```
+
+Installe l'AppImage dans `~/.local/bin` avec raccourci menu.
 
 👉 **[Dernière version Linux — GitHub Releases](https://github.com/DockSky/DockSky-release/releases/latest)**
 
