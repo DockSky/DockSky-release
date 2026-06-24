@@ -100,7 +100,7 @@ Requièrent le scope **`mcp:synapse`** en plus du plan Pro :
 
 | Paramètre | Requis | Description |
 |-----------|--------|-------------|
-| `machine` | Oui | Slug de la machine (ex. `docksky-vps`) |
+| `machine` | Oui | Slug de la machine (ex. `mon-vps`) |
 | `command` | Oui | Commande shell avec `{{SECRET}}` si besoin |
 | `container` | Non | Conteneur (défaut : `default_container` de la machine) |
 | `timeout_seconds` | Non | 1–300 s, défaut 30 |
@@ -111,7 +111,7 @@ Exemple minimal :
 {
   "name": "synapse_exec",
   "arguments": {
-    "machine": "docksky-vps",
+    "machine": "mon-vps",
     "command": "echo synapse_ok && hostname",
     "timeout_seconds": 15
   }
@@ -129,8 +129,8 @@ Cas réel testé en production : l'IA interroge MySQL sur ton VPS **sans jamais 
 | Élément | Exemple |
 |---------|---------|
 | Secret dans le coffre | `MYSQL_ROOT` |
-| Machine (slug) | `docksky-vps` |
-| Conteneur autorisé | `ctn_mysql` |
+| Machine (slug) | `mon-vps` |
+| Conteneur autorisé | `ma_base_mysql` |
 
 La commande s'exécute **dans** le conteneur (`docker exec` est géré par Synapse côté serveur). Tu n'as pas à préfixer `docker exec …` dans `command`.
 
@@ -146,8 +146,8 @@ La commande s'exécute **dans** le conteneur (`docker exec` est géré par Synap
   "params": {
     "name": "synapse_exec",
     "arguments": {
-      "machine": "docksky-vps",
-      "container": "ctn_mysql",
+      "machine": "mon-vps",
+      "container": "ma_base_mysql",
       "command": "mysql -uroot -p\"{{MYSQL_ROOT}}\" -e \"SHOW DATABASES\""
     }
   }
@@ -171,8 +171,8 @@ Si ton mot de passe contient des caractères spéciaux shell (`&`, `!`, espaces�
   "success": true,
   "exit_code": 0,
   "stdout": "Database\napollo\ndocksky_api\ntda_assistant\n…",
-  "machine": "docksky-vps",
-  "container": "ctn_mysql",
+  "machine": "mon-vps",
+  "container": "ma_base_mysql",
   "command_template": "mysql -uroot -p\"{{MYSQL_ROOT}}\" -e \"SHOW DATABASES\""
 }
 ```
@@ -186,8 +186,8 @@ curl -sS -X POST 'https://api.docksky.fr/synapse/exec' \
   -H "Authorization: Bearer $TOKEN_JWT" \
   -H "Content-Type: application/json" \
   -d '{
-    "machine": "docksky-vps",
-    "container": "ctn_mysql",
+    "machine": "mon-vps",
+    "container": "ma_base_mysql",
     "command": "mysql -uroot -p\"{{MYSQL_ROOT}}\" -e \"SHOW DATABASES\""
   }'
 ```
@@ -226,7 +226,7 @@ Toi : Liste mes machines Synapse et les secrets disponibles.
 
 IA  : [appelle synapse_list_machines et synapse_list_secrets]
 
-Toi : Sur docksky-vps, liste les bases MySQL du conteneur ctn_mysql avec le secret MYSQL_ROOT.
+Toi : Sur mon-vps, liste les bases MySQL du conteneur ma_base_mysql avec le secret MYSQL_ROOT.
 
 IA  : [appelle synapse_exec avec mysql -uroot -p"{{MYSQL_ROOT}}" -e "SHOW DATABASES"]
 ```
