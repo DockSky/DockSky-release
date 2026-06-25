@@ -5,16 +5,16 @@ title: Synapse et MCP (Cursor)
 
 # Synapse et MCP (Cursor / VS Code)
 
-Synapse s'utilise principalement via le **protocole MCP** (Model Context Protocol). Ton IA dans Cursor ou VS Code appelle des outils DockSky pour lister tes machines, lire les noms de secrets et **exécuter des commandes** — sans jamais recevoir les mots de passe.
+Synapse s'utilise principalement via le **protocole MCP** (Model Context Protocol). Ton IA dans Cursor ou VS Code appelle des outils DockSky pour lister tes machines, lire les noms de secrets et **exécuter des commandes**, sans jamais recevoir les mots de passe.
 
 ---
 
-## Étape 1 — Générer un token IA
+## Étape 1: Générer un token IA
 
 1. **Menu Vue → Paramètres**
 2. Section **Accès IA** (🤖)
 3. Clique **Générer un token**
-4. **Copie le token immédiatement** — il commence par `dk_ai_` et ne sera plus affiché
+4. **Copie le token immédiatement**, il commence par `dk_ai_` et ne sera plus affiché
 
 Caractéristiques du token généré par l'app :
 - **Quota** : 500 appels par jour
@@ -27,7 +27,7 @@ Quiconque possède ton token peut agir sur tes données DockSky dans la limite d
 
 ---
 
-## Étape 2 — Configurer Cursor ou VS Code
+## Étape 2: Configurer Cursor ou VS Code
 
 Crée ou modifie le fichier de configuration MCP :
 
@@ -56,7 +56,7 @@ Redémarre Cursor ou recharge la fenêtre VS Code pour que le serveur MCP soit d
 
 ---
 
-## Étape 3 — Préparer Synapse
+## Étape 3: Préparer Synapse
 
 Avant de demander à l'IA d'exécuter quoi que ce soit :
 
@@ -177,7 +177,7 @@ Si ton mot de passe contient des caractères spéciaux shell (`&`, `!`, espaces�
 }
 ```
 
-Le champ `command_template` est ce qui est journalisé — **jamais** la valeur résolue de `MYSQL_ROOT`.
+Le champ `command_template` est ce qui est journalisé: **jamais** la valeur résolue de `MYSQL_ROOT`.
 
 ### Équivalent API REST (hors MCP)
 
@@ -205,7 +205,7 @@ curl -sS -X POST 'https://api.docksky.fr/synapse/exec' \
 
 | Scope | Outils débloqués |
 |-------|------------------|
-| `mcp:read` | Contexte TDA, facettes, `synapse_list_*` |
+| `mcp:read` | Contexte projet, facettes, `synapse_list_*` |
 | `mcp:write` | `update_*`, `add_*` sur la base TDA |
 | `mcp:synapse` | `synapse_exec`, machines, secrets (`synapse_put/delete_secret`…) |
 
@@ -241,7 +241,7 @@ Tu retrouves l'exécution dans **Paramètres → Journal Synapse**.
 |--------|--------|
 | Exécutions Synapse | **30 / minute** par utilisateur |
 | Appels MCP (IP normale) | 200 / minute |
-| Appels MCP (IP de confiance) | 400 / minute — après un premier appel MCP valide avec ton token, ton IP est mémorisée **24 h** dans Redis (whitelist temporaire, pas d'auto-ban sur le trafic MCP) |
+| Appels MCP (IP de confiance) | 400 / minute, après un premier appel MCP valide avec ton token, ton IP est mémorisée **24 h** dans Redis (whitelist temporaire, pas d'auto-ban sur le trafic MCP) |
 | Quota token IA | 500 / jour par défaut (configurable à la création) |
 
 Au-delà, l'API renvoie HTTP **429** avec `Retry-After`.
@@ -253,7 +253,7 @@ Au-delà, l'API renvoie HTTP **429** avec `Retry-After`.
 | Situation | Action |
 |-----------|--------|
 | Révocation normale | **Paramètres → Accès IA → Révoquer le token** |
-| Fuite de token, urgence | `POST https://api.docksky.fr/tda/ai/tokens/emergency-revoke?token=dk_ai_…` (sans login — le token lui-même suffit) |
+| Fuite de token, urgence | `POST https://api.docksky.fr/tda/ai/tokens/emergency-revoke?token=dk_ai_…` (sans login, le token lui-même suffit) |
 
 ---
 
@@ -261,13 +261,13 @@ Au-delà, l'API renvoie HTTP **429** avec `Retry-After`.
 
 | Message | Cause probable |
 |---------|----------------|
-| `Pilotage IA Synapse réservé au plan Pro` | Plan gratuit — passe au Pro |
+| `Pilotage IA Synapse réservé au plan Pro` | Plan gratuit, passe au Pro |
 | `Secret manquant pour le placeholder {{X}}` | Secret non enregistré dans le coffre |
 | `Machine introuvable` | Slug incorrect ou machine supprimée |
 | `Conteneur non autorisé` | Conteneur absent de la liste de la machine |
-| `Synapse rate limit exceeded` | Trop d'exec en 1 minute — attends 60 s |
+| `Synapse rate limit exceeded` | Trop d'exec en 1 minute, attends 60 s |
 | Outil `synapse_exec` absent de `tools/list` | Scope `mcp:synapse` manquant sur le token |
-| `Quota journalier IA atteint` | 500 appels MCP/jour dépassés — attends le lendemain |
+| `Quota journalier IA atteint` | 500 appels MCP/jour dépassés, attends le lendemain |
 
 ---
 
@@ -275,5 +275,5 @@ Au-delà, l'API renvoie HTTP **429** avec `Retry-After`.
 
 - [Vue d'ensemble Pilotage IA](./pilotage-ia-synapse)
 - [Secrets et machines](./synapse-secrets-et-machines)
-- [Utiliser DockSky avec ton IA](./configurer-son-llm) — méthodes copier-coller et contexte
-- [Partage de contexte](./partage-contexte) — contexte TDA sans MCP
+- [Utiliser DockSky avec ton IA](./configurer-son-llm), méthodes copier-coller et contexte
+- [Partage de contexte](./partage-contexte), contexte projet sans MCP

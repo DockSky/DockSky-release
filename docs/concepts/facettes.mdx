@@ -1,20 +1,20 @@
 ---
 sidebar_position: 2
-title: Facettes — ton cerveau externe
+Facettes: ton cerveau externe
 ---
 
-# Facettes — ton cerveau externe
+Facettes: ton cerveau externe
 
 Les Facettes sont la mémoire structurée de tes projets.
 
 Si tu as déjà perdu une heure à chercher "comment j'avais résolu ce bug déjà ?" ou "quelle était ma décision sur ce point ?",
-les Facettes sont la réponse. Elles mémorisent ce qui vaut la peine d'être retenu — pour toi, et pour ton IA.
+les Facettes sont la réponse. Elles mémorisent ce qui vaut la peine d'être retenu, pour toi, et pour ton IA.
 
 ---
 
 ## Le principe
 
-Chaque projet contient plusieurs Facettes. Une Facette est un **fichier thématique** : une pour l'architecture technique, une pour les décisions de design, une pour les bugs et solutions, une pour les personnages d'un roman, etc.
+Chaque projet contient plusieurs Facettes. Une Facette est un **fichier thématique**: une pour l'architecture technique, une pour les décisions de design, une pour les bugs et solutions, une pour les personnages d'un roman, etc.
 
 Dans chaque Facette, tu crées des **entrées typées**.
 
@@ -25,36 +25,36 @@ Dans chaque Facette, tu crées des **entrées typées**.
 | Type | Usage |
 |------|-------|
 | `NOTE` | Informations générales, contexte, observations |
-| `WORKS` | Ce qui fonctionne — solutions validées, patterns éprouvés |
-| `TRAP` | Ce qui ne fonctionne pas — erreurs à ne pas répéter |
+| `WORKS` | Ce qui fonctionne, solutions validées, patterns éprouvés |
+| `TRAP` | Ce qui ne fonctionne pas, erreurs à ne pas répéter |
 | `DECISION` | Choix acté, avec le raisonnement qui l'a motivé |
 | `TODO` | Tâche à faire dans le contexte de cette Facette |
 
-### WORKS — ce qui marche
+WORKS: ce qui marche
 
-**Pour un projet technique :**
+**Pour un projet technique:**
 ```
 WORKS: Exporter en PDF depuis le navigateur
 → Fichier > Imprimer > Enregistrer en PDF. Fonctionne mieux que l'export natif.
 ```
 
-**Pour un roman :**
+**Pour un roman:**
 ```
 WORKS: Transition chapitre 3 → 4
 → Plonger directement dans une scène d'action plutôt qu'un résumé. Ton retour de lecture de mai était positif.
 ```
 
-Un `WORKS` n'est pas une note de satisfaction — c'est une **solution validée** que tu pourras réutiliser sans réfléchir.
+Un `WORKS` n'est pas une note de satisfaction, c'est une **solution validée** que tu pourras réutiliser sans réfléchir.
 
-### TRAP — ce qui casse ou ne fonctionne pas
+TRAP: ce qui casse ou ne fonctionne pas
 
-**Pour un projet professionnel :**
+**Pour un projet professionnel:**
 ```
 TRAP: Envoyer une facture sans relire les coordonnées bancaires
 → Le client X avait un IBAN obsolète en système. Vérifier à chaque nouvelle facture.
 ```
 
-**Pour un roman :**
+**Pour un roman:**
 ```
 TRAP: Personnage secondaire Mika
 → Son prénom était "Micka" jusqu'au chapitre 7 puis "Mika" après. Corriger dans toute la relecture.
@@ -62,17 +62,17 @@ TRAP: Personnage secondaire Mika
 
 Un `TRAP` t'empêche de refaire la même erreur. Il indique aussi à ton IA la solution à ne pas suggérer.
 
-### DECISION — les choix actés
+DECISION: les choix actés
 
-**Pour un projet de design :**
+**Pour un projet de design:**
 ```
 DECISION: Palette de couleurs finale
 → Marine + or + blanc cassé. Le gris avait été testé mais jugé trop froid par le client lors de la revue du 12 mars.
 ```
 
-**Pour un projet perso :**
+**Pour un projet perso:**
 ```
-DECISION: Pas de réseaux sociaux pour ce projet avant la version finale
+DECISION, Pas de réseaux sociaux pour ce projet avant la version finale
 → Évite de disperser l'énergie créatrice avant d'avoir quelque chose de solide.
 ```
 
@@ -84,11 +84,11 @@ Les décisions documentées évitent de remettre en cause indéfiniment les mêm
 
 :::info 1 titre = 1 sujet = 1 entrée
 
-Ne crée pas "Problème livraison v2", "Problème livraison mars 2026", "Problème livraison nouveau" — mets tout dans une seule entrée **"Problème livraison"** que tu enrichis au fil du temps.
+Ne crée pas "Problème livraison v2", "Problème livraison mars 2026", "Problème livraison nouveau", mets tout dans une seule entrée **"Problème livraison"** que tu enrichis au fil du temps.
 
 L'historique reste lisible. La recherche reste efficace. Ton IA retrouve le bon contexte sans ambiguïté.
 
-Exception : si deux sujets sont vraiment distincts, deux entrées distinctes sont légitimes.
+Exception: si deux sujets sont vraiment distincts, deux entrées distinctes sont légitimes.
 :::
 
 ---
@@ -97,7 +97,7 @@ Exception : si deux sujets sont vraiment distincts, deux entrées distinctes son
 
 Les Facettes ont une valeur autonome, indépendamment de l'IA.
 
-Tu peux les utiliser comme un **carnet de bord structuré** pour n'importe quel sujet complexe :
+Tu peux les utiliser comme un **carnet de bord structuré** pour n'importe quel sujet complexe:
 un dossier juridique, un roman, une préparation médicale, une succession.
 Elles restent filtrables et consultables n'importe quand.
 
@@ -105,14 +105,12 @@ Elles restent filtrables et consultables n'importe quand.
 
 ## Partager avec ton IA
 
-Quand tu veux brieffer ton IA avec le contenu d'une Facette :
-
-1. Ouvre la vue **Facettes** de ton projet
+Quand tu veux brieffer ton IA avec le contenu d'une Facette: 1. Ouvre la vue **Facettes** de ton projet
 2. Sélectionne la ou les Facettes pertinentes
 3. Clique sur **Copier le contexte**
 4. Colle en début de conversation dans Claude, ChatGPT, ou autre
 
-Ton IA dispose immédiatement de tout le contexte : décisions passées, solutions validées, pièges connus, état d'avancement.
+Ton IA dispose immédiatement de tout le contexte: décisions passées, solutions validées, pièges connus, état d'avancement.
 
 Pour une configuration permanente via lien de contexte, voir [Partage de contexte](../integration-ia/partage-contexte).
 
@@ -120,15 +118,15 @@ Pour une configuration permanente via lien de contexte, voir [Partage de context
 
 ## Exemples de Facettes
 
-**Facette "Décisions & Choix" d'un projet de roman :**
+**Facette "Décisions & Choix" d'un projet de roman:**
 
 | Type | Titre | Contenu |
 |------|-------|---------|
 | `DECISION` | Fin du tome 1 | La mort d'Irène est confirmée. Écartée l'option "coma" jugée trop facile lors de la relecture du 3 avril. |
-| `TRAP` | Chronologie chapitre 5-8 | Le chapitre 7 se passe 3 jours avant le chapitre 6 — attention à ne pas introduire de référence à cet événement trop tôt. |
+| `TRAP` | Chronologie chapitre 5-8 | Le chapitre 7 se passe 3 jours avant le chapitre 6, attention à ne pas introduire de référence à cet événement trop tôt. |
 | `NOTE` | Inspirations Irène | Personnage inspiré de Marguerite Yourcenar + ex-colègue de recherche. Ton à la fois froid et poignant. |
 
-**Facette "Fournisseurs & Contacts" d'un projet freelance :**
+**Facette "Fournisseurs & Contacts" d'un projet freelance:**
 
 | Type | Titre | Contenu |
 |------|-------|---------|
@@ -141,4 +139,4 @@ Pour une configuration permanente via lien de contexte, voir [Partage de context
 ## La Corbeille IA
 
 Si tu autorises DockSky à gérer ta mémoire, il peut marquer automatiquement les entrées obsolètes pour suppression.
-Elles passent en **corbeille** — tu peux les consulter et les restaurer à tout moment. Voir [Corbeille IA](../fonctionnalites/corbeille).
+Elles passent en **corbeille**   tu peux les consulter et les restaurer à tout moment. Voir [Corbeille IA](../fonctionnalites/corbeille).

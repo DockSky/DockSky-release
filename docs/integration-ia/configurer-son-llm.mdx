@@ -5,7 +5,7 @@ title: Utiliser DockSky avec ton IA
 
 # Utiliser DockSky avec ton IA
 
-DockSky fonctionne avec toutes les IA du marché : Claude, ChatGPT, Gemini, Copilot, Mistral, et n'importe quel autre outil qui accepte du texte en entrée. La procédure est la même pour tous.
+DockSky fonctionne avec toutes les IA du marché: Claude, ChatGPT, Gemini, Copilot, Mistral, et n'importe quel autre outil qui accepte du texte en entrée. La procédure est la même pour tous.
 
 ---
 
@@ -17,11 +17,9 @@ Tu n'as pas besoin de comprendre comment ça fonctionne techniquement. Il te suf
 
 ---
 
-## Méthode 1 — Copie rapide depuis les Facettes
+Méthode 1: Copie rapide depuis les Facettes
 
-C'est la méthode la plus simple :
-
-1. Ouvre la vue **Facettes** d'un de tes projets
+C'est la méthode la plus simple: 1. Ouvre la vue **Facettes** d'un de tes projets
 2. Sélectionne la ou les Facettes qui contiennent le contexte utile
 3. Clique sur **Copier le contexte**
 4. Va dans Claude, ChatGPT, ou ton IA habituelle
@@ -31,36 +29,30 @@ Ton IA connaît maintenant tes décisions passées, tes solutions connues et l'�
 
 ---
 
-## Méthode 2 — Contextes prédéfinis
+Méthode 2: Contextes prédéfinis
 
-Si tu fais souvent le même type de session ("session d'écriture", "session de planification", "session technique"), tu peux préparer un **contexte prédéfini** une fois, et le réutiliser à chaque fois :
-
-1. Ouvre la vue **Contextes IA** dans le menu
-2. Crée un groupe (ex : "Session d'écriture chapitre")
+Si tu fais souvent le même type de session ("session d'écriture", "session de planification", "session technique"), tu peux préparer un **contexte prédéfini** une fois, et le réutiliser à chaque fois: 1. Ouvre la vue **Contextes IA** dans le menu
+2. Crée un groupe (ex: "Session d'écriture chapitre")
 3. Coche les notes pertinentes dans tes Facettes
-4. La prochaine fois, ouvre ce groupe et clique **Copier** — c'est prêt
+4. La prochaine fois, ouvre ce groupe et clique **Copier**   c'est prêt
 
 → Voir [Contextes IA](./contextes-ia) pour le détail.
 
 ---
 
-## Méthode 3 — Lien automatique (avancé)
+Méthode 3: Lien automatique (avancé)
 
-Pour que ton IA récupère ton contexte automatiquement à chaque conversation, sans que tu ne fasses rien :
-
-→ Voir [Partage de contexte](./partage-contexte).
+Pour que ton IA récupère ton contexte automatiquement à chaque conversation, sans que tu ne fasses rien: → Voir [Partage de contexte](./partage-contexte).
 
 ---
 
-## Méthode 4 — MCP DockSky (Cursor / VS Code)
+Méthode 4: MCP DockSky (Cursor / VS Code)
 
-Pour les développeurs qui utilisent **Cursor** ou **VS Code** avec une IA intégrée :
-
-1. Génère un token dans **Paramètres → Accès IA**
+Pour les développeurs qui utilisent **Cursor** ou **VS Code** avec une IA intégrée: 1. Génère un token dans **Paramètres → Accès IA**
 2. Configure le serveur MCP (`https://api.docksky.fr/tda/mcp`)
 3. Ton IA lit tes facettes, tâches et contexte projet directement
 
-Avec un **plan Pro**, tu débloques en plus le **Pilotage IA (Synapse)** : l'IA exécute des commandes shell sur ton infra avec des secrets `{{NOM}}` — sans jamais voir les mots de passe.
+Avec un **plan Pro**, tu débloques en plus le **Pilotage IA (Synapse)**: l'IA exécute des commandes shell sur ton infra avec des secrets `{{NOM}}`   sans jamais voir les mots de passe.
 
 → [Configurer MCP et Synapse](./synapse-mcp-cursor)  
 → [Vue d'ensemble Pilotage IA](./pilotage-ia-synapse)

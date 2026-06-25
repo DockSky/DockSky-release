@@ -5,13 +5,13 @@ title: Développeurs
 
 # DockSky pour les développeurs
 
-Contexte de projet toujours prêt pour ton IA, décisions techniques mémorisées, bugs connus documentés — et ton IA au courant de tout ça sans que tu réexpliques quoi que ce soit.
+Contexte de projet toujours prêt pour ton IA, décisions techniques mémorisées, bugs connus documentés, et ton IA au courant de tout ça sans que tu réexpliques quoi que ce soit.
 
 ---
 
 ## Le problème du dév solo
 
-Tu travailles avec Claude, ChatGPT ou Copilot. À chaque nouvelle conversation, tu réexpliques ton stack, ton architecture, tes conventions, les bugs connus. C'est de la friction pure — et ça prend facilement 5 à 10 minutes avant de pouvoir travailler vraiment.
+Tu travailles avec Claude, ChatGPT ou Copilot. À chaque nouvelle conversation, tu réexpliques ton stack, ton architecture, tes conventions, les bugs connus. C'est de la friction pure, et ça prend facilement 5 à 10 minutes avant de pouvoir travailler vraiment.
 
 Avec DockSky, tu prépares ce contexte une fois, et tu le charges en quelques secondes à chaque session.
 
@@ -19,16 +19,14 @@ Avec DockSky, tu prépares ce contexte une fois, et tu le charges en quelques se
 
 ## Les Facettes pour ton code
 
-Crée un projet par base de code et organise la mémoire technique en [Facettes](../concepts/facettes) :
-
-| Facette | Ce qu'on y met |
+Crée un projet par base de code et organise la mémoire technique en [Facettes](../concepts/facettes): | Facette | Ce qu'on y met |
 |---------|---------------|
 | **Contexte IA** | Stack, conventions, règles de collaboration avec l'IA |
 | **Décisions archi** | Pourquoi tu as fait ce choix plutôt qu'un autre |
 | **Bugs & solutions** | Ce qui a planté, ce qui a marché, comment c'était résolu |
 | **Accès & config** | Variables d'environnement, ports, commandes à connaître |
 
-**Avant une session avec ton IA :**
+**Avant une session avec ton IA:**
 1. Ouvre la vue Facettes
 2. Clique **Copier le contexte**
 3. Colle en début de conversation
@@ -39,9 +37,7 @@ Ton IA connaît ton projet. Tu commences à travailler directement.
 
 ## Les Contextes IA pour les sessions types
 
-Si tu as différents types de sessions (backend, front, infra, documentation), les [Contextes IA](../integration-ia/contextes-ia) te permettent de préparer des "paquets" de contexte réutilisables :
-
-- *Session backend* → config BDD + conventions API + bugs connus
+Si tu as différents types de sessions (backend, front, infra, documentation), les [Contextes IA](../integration-ia/contextes-ia) te permettent de préparer des "paquets" de contexte réutilisables: - *Session backend* → config BDD + conventions API + bugs connus
 - *Session déploiement* → commandes VPS + config serveur + pièges connus
 
 Tu chargesces le bon paquet selon le type de session. Zéro réexplication.
@@ -58,20 +54,18 @@ Voir la section [Journal & Commits Git](../integration-ia/journal-git-commit) po
 
 ## Quick Wins pour les petites tâches techniques
 
-Les petites tâches techniques s'accumulent vite : corriger un warning, mettre à jour une dépendance, documenter une fonction. La [Roadmap](../fonctionnalites/roadmap) et les **Quick Wins** te permettent d'en enchaîner plusieurs pendant les creux de concentration, sans les perdre de vue.
+Les petites tâches techniques s'accumulent vite: corriger un warning, mettre à jour une dépendance, documenter une fonction. La [Roadmap](../fonctionnalites/roadmap) et les **Quick Wins** te permettent d'en enchaîner plusieurs pendant les creux de concentration, sans les perdre de vue.
 
 ---
 
-## Pilotage IA — exécuter sans coller de MDP dans le chat
+Pilotage IA: exécuter sans coller de MDP dans le chat
 
-Pour les sessions infra (VPS, Docker, MySQL), DockSky intègre **Synapse** (affiché **Pilotage IA** dans l'app) :
-
-- Tu stockes tes secrets dans un **coffre personnel** (`DB_USER`, `DB_PASS`…)
+Pour les sessions infra (VPS, Docker, MySQL), DockSky intègre **Synapse** (affiché **Pilotage IA** dans l'app): - Tu stockes tes secrets dans un **coffre personnel** (`DB_USER`, `DB_PASS`…)
 - Tu déclares une **machine** avec les conteneurs autorisés
-- Ton IA dans **Cursor** appelle `synapse_exec` via MCP avec des placeholders `{{DB_PASS}}` — jamais le mot de passe en clair
+- Ton IA dans **Cursor** appelle `synapse_exec` via MCP avec des placeholders `{{DB_PASS}}`   jamais le mot de passe en clair
 - Tu consultes le **journal** dans Paramètres pour vérifier ce qui a été exécuté
 
-**Prérequis :** plan Pro DockSky App + token IA + configuration MCP.
+**Prérequis:** plan Pro DockSky App + token IA + configuration MCP.
 
 | Étape | Où |
 |-------|-----|

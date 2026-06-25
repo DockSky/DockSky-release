@@ -6,7 +6,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
   title: 'DockSky Docs',
-  tagline: 'Documentation utilisateur DockSky',
+  tagline: 'Mémoire de projet et collaboration IA (MCP) pour travailleurs solo',
   favicon: 'img/favicon.ico',
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
@@ -95,7 +95,7 @@ const config: Config = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} DockSky. Conçu par un cerveau TDA, utile à tous.`,
+      copyright: `Copyright © ${new Date().getFullYear()} DockSky. Collaboration IA et mémoire de projet pour solo-workers.`,
     },
     prism: {
       theme: prismThemes.github,

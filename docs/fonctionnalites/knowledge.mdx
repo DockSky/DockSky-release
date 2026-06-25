@@ -7,34 +7,30 @@ title: Knowledge Manager
 
 Le **Knowledge Manager** est ta base de connaissances personnelle dans DockSky. C'est l'endroit où tu captures ce que tu apprends, les solutions que tu trouves, les procédures que tu répètes, les idées que tu ne veux pas perdre.
 
-Il est conçu pour le cerveau TDA : capture en quelques secondes, retrouver en quelques secondes.
+Il est conçu pour le cerveau TDA: capture en quelques secondes, retrouver en quelques secondes.
 
 :::tip Cerveau TDA
-La mémoire de travail TDA est volatile. Une idée peut disparaître entre le moment où elle émerge et le moment où tu ouvres un éditeur. La capture rapide du Knowledge Manager existe pour ça — tu captures d'abord, tu enrichis ensuite.
+La mémoire de travail TDA est volatile. Une idée peut disparaître entre le moment où elle émerge et le moment où tu ouvres un éditeur. La capture rapide du Knowledge Manager existe pour ça, tu captures d'abord, tu enrichis ensuite.
 :::
 
 ---
 
 ## La différence avec les Facettes
 
-Le Knowledge Manager et les [Facettes](../concepts/facettes) coexistent, mais ils n'ont pas le même rôle :
-
-| Knowledge Manager 📚 | Facettes 🧠 |
+Le Knowledge Manager et les [Facettes](../concepts/facettes) coexistent, mais ils n'ont pas le même rôle: | Knowledge Manager 📚 | Facettes 🧠 |
 |----------------------|-------------|
 | Base de connaissances **générale** | Mémoire structurée **par projet** |
 | Idées, recettes, procédures, bookmarks... | WORKS, TRAP, DECISION, TODO... |
 | Recherche dans tout le texte, tags, thèmes | Organisée par projet, partageable avec l'IA |
 | Usage personnel | Usage IA + co-pilote de projet |
 
-En pratique : une solution à un bug que tu veux partager avec ton IA → Facette. Une recette de cuisine ou une procédure SSH que tu veux retrouver toi-même → Knowledge.
+En pratique: une solution à un bug que tu veux partager avec ton IA → Facette. Une recette de cuisine ou une procédure SSH que tu veux retrouver toi-même → Knowledge.
 
 ---
 
 ## Les types d'entrées
 
-Chaque entrée a un type qui indique sa nature :
-
-| Type | Emoji | Usage |
+Chaque entrée a un type qui indique sa nature: | Type | Emoji | Usage |
 |------|-------|-------|
 | `NOTE` | 📝 | Information générale, observation, contexte |
 | `IDEA` | 💡 | Une idée à creuser plus tard |
@@ -49,9 +45,9 @@ Chaque entrée a un type qui indique sa nature :
 
 | Statut | Signification |
 |--------|---------------|
-| `DRAFT` | Capture rapide — à compléter plus tard |
+| `DRAFT` | Capture rapide, à compléter plus tard |
 | `ACTIVE` | Entrée complète, prête à l'emploi |
-| `ARCHIVED` | Soft-supprimée — encore récupérable |
+| `ARCHIVED` | Soft-supprimée, encore récupérable |
 
 Quand tu utilises la capture rapide, l'entrée est créée en `DRAFT`. Tu peux l'enrichir ensuite depuis la vue Knowledge.
 
@@ -59,9 +55,7 @@ Quand tu utilises la capture rapide, l'entrée est créée en `DRAFT`. Tu peux l
 
 ## Thèmes
 
-Les thèmes sont des **catégories personnalisables** pour organiser tes entrées. Par défaut, DockSky crée :
-
-- 💻 Développement
+Les thèmes sont des **catégories personnalisables** pour organiser tes entrées. Par défaut, DockSky crée: - 💻 Développement
 - 🔧 DevOps
 - 🏠 Personnel
 - 💼 Travail
@@ -77,21 +71,17 @@ Un thème est différent d'un tag. Le thème est la **catégorie principale** d'
 
 ## Tags
 
-Les tags sont des mots-clés libres associés à une entrée. Ils sont partagés entre toutes tes entrées et triés par popularité — les plus utilisés remontent en premier dans les suggestions.
+Les tags sont des mots-clés libres associés à une entrée. Ils sont partagés entre toutes tes entrées et triés par popularité, les plus utilisés remontent en premier dans les suggestions.
 
-Quelques conventions utiles :
-
-- Utilise des tags courts et stables : `avalonia`, `mysql`, `ssh`, `regex`
-- Évite les tags trop génériques : `code`, `truc`, `important`
+Quelques conventions utiles: - Utilise des tags courts et stables: `avalonia`, `mysql`, `ssh`, `regex`
+- Évite les tags trop génériques: `code`, `truc`, `important`
 - Un tag = un concept précis
 
 ---
 
 ## Capture rapide
 
-La capture rapide est accessible depuis le **bandeau permanent** sans interrompre ce que tu fais :
-
-1. Clique sur le bouton **📚** dans le bandeau (ou raccourci clavier)
+La capture rapide est accessible depuis le **bandeau permanent** sans interrompre ce que tu fais: 1. Clique sur le bouton **📚** dans le bandeau (ou raccourci clavier)
 2. Tape un titre
 3. Choisis optionnellement le type (NOTE par défaut)
 4. Appuie sur **Entrée**
@@ -104,9 +94,7 @@ L'entrée est créée immédiatement en statut `DRAFT`. Elle attend dans ta Know
 
 La vue Knowledge propose une **recherche libre** sur le titre et le contenu de toutes tes entrées. Elle est rapide et ne nécessite pas de connaître les tags ou le thème exact.
 
-Tu peux combiner la recherche avec des filtres :
-
-| Filtre | Usage |
+Tu peux combiner la recherche avec des filtres: | Filtre | Usage |
 |--------|-------|
 | Type | Voir uniquement les BUGFIX, les IDEA, etc. |
 | Thème | Filtrer par catégorie |
@@ -118,10 +106,8 @@ Tu peux combiner la recherche avec des filtres :
 
 ## Favoris et épinglés
 
-Deux mécanismes pour mettre en avant les entrées importantes :
-
-- **⭐ Favori** — tu marques ce que tu consultes souvent ou que tu veux retrouver facilement
-- **📌 Épinglé** — l'entrée remonte **en haut de la liste**, même sans filtre
+Deux mécanismes pour mettre en avant les entrées importantes: - **⭐ Favori**   tu marques ce que tu consultes souvent ou que tu veux retrouver facilement
+- **📌 Épinglé**   l'entrée remonte **en haut de la liste**, même sans filtre
 
 Un `RECIPE` que tu utilises tous les jours → épingle-le. Une procédure que tu aimes bien mais que tu n'utilises qu'occasionnellement → mets-la en favori.
 
@@ -143,9 +129,7 @@ Pour une suppression définitive, une option de hard-delete est disponible depui
 
 ## Statistiques
 
-La vue Knowledge affiche un résumé de ta base :
-
-- Nombre total d'entrées actives
+La vue Knowledge affiche un résumé de ta base: - Nombre total d'entrées actives
 - Répartition par type
 - Entrées créées ce mois-ci
 - Tags les plus utilisés
@@ -161,7 +145,7 @@ Capture rapide depuis le bandeau (5 secondes)
               ↓
   (Plus tard) Ouvrir la vue Knowledge
               ↓
-  Enrichir : contenu complet, thème, tags, type
+  Enrichir: contenu complet, thème, tags, type
               ↓
         Passer en ACTIVE
               ↓

@@ -5,7 +5,7 @@ title: Partage de contexte automatique
 
 # Partage de contexte automatique
 
-Plutôt que de copier-coller le contexte à chaque session, tu peux configurer ton IA pour qu'elle récupère ton contexte DockSky automatiquement à chaque conversation — sans aucune action de ta part.
+Plutôt que de copier-coller le contexte à chaque session, tu peux configurer ton IA pour qu'elle récupère ton contexte DockSky automatiquement à chaque conversation, sans aucune action de ta part.
 
 ---
 
@@ -13,7 +13,7 @@ Plutôt que de copier-coller le contexte à chaque session, tu peux configurer t
 
 Quand tu actives l'accès IA sur un projet, DockSky génère un **lien unique** vers le contexte de ce projet. Tu configures ton IA préférée pour qu'elle consulte ce lien à chaque début de conversation.
 
-Le lien reste à jour automatiquement : quand tu modifies tes Facettes, l'IA dispose du nouveau contexte dès la prochaine conversation.
+Le lien reste à jour automatiquement: quand tu modifies tes Facettes, l'IA dispose du nouveau contexte dès la prochaine conversation.
 
 ---
 
@@ -22,9 +22,8 @@ Le lien reste à jour automatiquement : quand tu modifies tes Facettes, l'IA dis
 1. Ouvre ton projet (vue **Projets**)
 2. Clique sur les paramètres du projet (icône ⚙️)
 3. Active l'option **Accès IA**
-4. Choisis le niveau d'accès :
-   - **Lecture** — ton IA peut lire les Facettes (recommandé)
-   - **Écriture** — ton IA peut aussi ajouter des notes
+4. Choisis le niveau d'accès: - **Lecture**   ton IA peut lire les Facettes (recommandé)
+   - **Écriture**   ton IA peut aussi ajouter des notes
 5. Copie le **lien de contexte** généré
 
 ---
@@ -32,10 +31,8 @@ Le lien reste à jour automatiquement : quand tu modifies tes Facettes, l'IA dis
 ## Configurer Claude
 
 1. Va dans Claude → **Settings** → **Custom Instructions** (ou "Instructions système")
-2. Ajoute une instruction du type :
-
-```
-Début de chaque conversation : consulte mon contexte de projet à l'adresse [LIEN DOCKSKY].
+2. Ajoute une instruction du type: ```
+Début de chaque conversation: consulte mon contexte de projet à l'adresse [LIEN DOCKSKY].
 Base tes réponses sur ce contexte.
 ```
 
@@ -51,11 +48,9 @@ Base tes réponses sur ce contexte.
 
 ## Révoquer l'accès
 
-Si tu veux révoquer l'accès (bloquer le lien existant et en générer un nouveau) :
-
-1. Ouvre les paramètres du projet
+Si tu veux révoquer l'accès (bloquer le lien existant et en générer un nouveau): 1. Ouvre les paramètres du projet
 2. Clique sur **Révoquer l'accès**
-3. Un nouveau lien est généré — l'ancien ne fonctionne plus
+3. Un nouveau lien est généré, l'ancien ne fonctionne plus
 
 :::caution
 Si tu as partagé ce lien avec quelqu'un ou configuré plusieurs outils avec, pense à mettre à jour chaque configuration après la révocation.

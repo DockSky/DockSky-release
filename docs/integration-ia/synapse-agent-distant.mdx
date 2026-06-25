@@ -42,45 +42,40 @@ sequenceDiagram
 ## Créer une machine agent
 
 `POST https://api.docksky.fr/synapse/machines`  
-Auth : `Authorization: Bearer <JWT>` — plan **Pro** requis.
+Auth: `Authorization: Bearer <JWT>`   plan **Pro** requis.
 
 ```json
 {
-  "slug": "mon-vps-maison",
-  "label": "VPS perso Robert",
-  "machine_type": "agent",
-  "allowed_containers": ["local"],
-  "default_container": "local",
-  "host_hint": "192.168.1.50"
+  "slug": "mon-vps-maison", "label": "VPS perso Robert", "machine_type": "agent", "allowed_containers": ["local"], "default_container": "local", "host_hint": "192.168.1.50"
 }
 ```
 
-La réponse inclut `agent_token` — **copie-le immédiatement**, il ne sera plus affiché.
+La réponse inclut `agent_token`   **copie-le immédiatement**, il ne sera plus affiché.
 
-Équivalent MCP : outil `synapse_create_machine` avec `"machine_type": "agent"` (scope `mcp:synapse` requis).
+Équivalent MCP: outil `synapse_create_machine` avec `"machine_type": "agent"` (scope `mcp:synapse` requis).
 
 ---
 
 ## Installer l'agent sur le serveur distant
 
-Le script est dans le dépôt `docksky-api` : `scripts/synapse/agent.py`.
+Le script est dans le dépôt `docksky-api`: `scripts/synapse/agent.py`.
 
 ```bash
 export SYNAPSE_API_URL=https://api.docksky.fr
 export SYNAPSE_AGENT_TOKEN=<agent_token reçu à la création>
-# Optionnel : intervalle de poll (défaut 3 s)
+# Optionnel: intervalle de poll (défaut 3 s)
 export SYNAPSE_AGENT_POLL_SECONDS=3
 
 python3 scripts/synapse/agent.py
 ```
 
-L'agent :
+L'agent:
 - Envoie `POST /synapse/agent/heartbeat` régulièrement
 - Récupère les jobs via `GET /synapse/agent/jobs/next`
 - Exécute la commande en shell local
 - Rapporte le résultat via `POST /synapse/agent/jobs/{id}/complete`
 
-Authentification agent : header **`X-Synapse-Agent-Token`** (pas le token IA `dk_ai_`).
+Authentification agent: header **`X-Synapse-Agent-Token`** (pas le token IA `dk_ai_`).
 
 ---
 
@@ -98,7 +93,7 @@ Authentification agent : header **`X-Synapse-Agent-Token`** (pas le token IA `dk
 
 - Le **token agent** est distinct du token IA MCP
 - Un agent ne voit que les jobs destinés à **sa** machine
-- Les secrets sont résolus **sur le serveur DockSky** avant envoi au job — l'agent reçoit la commande finale, pas les placeholders
+- Les secrets sont résolus **sur le serveur DockSky** avant envoi au job, l'agent reçoit la commande finale, pas les placeholders
 - Révoque une machine compromise via `DELETE /synapse/machines/{slug}` (l'agent ne pourra plus s'authentifier)
 
 ---
@@ -107,7 +102,7 @@ Authentification agent : header **`X-Synapse-Agent-Token`** (pas le token IA `dk
 
 | Type | Cas d'usage |
 |------|-------------|
-| `docker_local` | Conteneurs sur l'infra DockSky (`mon_app`, `ma_base_mysql`, …) — **cas le plus courant** |
+| `docker_local` | Conteneurs sur l'infra DockSky (`mon_app`, `ma_base_mysql`, …): **cas le plus courant** |
 | `agent` | Ton propre VPS, poste de dev hors infra DockSky, réseau local |
 
 Pour la majorité des utilisateurs DockSky App, **`docker_local` via l'interface Paramètres** suffit.
@@ -116,6 +111,6 @@ Pour la majorité des utilisateurs DockSky App, **`docker_local` via l'interface
 
 ## Voir aussi
 
-- [Pilotage IA — vue d'ensemble](./pilotage-ia-synapse)
+- [Pilotage IA, vue d'ensemble](./pilotage-ia-synapse)
 - [Secrets et machines](./synapse-secrets-et-machines)
 - [Synapse et MCP](./synapse-mcp-cursor)

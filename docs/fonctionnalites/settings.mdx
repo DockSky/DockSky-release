@@ -19,9 +19,7 @@ La vue **Paramètres** regroupe toutes les options de configuration de DockSky. 
 
 ### Vue par défaut
 
-Choisis la vue qui s'affiche automatiquement quand tu lances DockSky :
-
-| Option | Recommandé si |
+Choisis la vue qui s'affiche automatiquement quand tu lances DockSky: | Option | Recommandé si |
 |--------|---------------|
 | Dashboard | Tu veux un bilan rapide au démarrage |
 | Roadmap | Tu passes directement au travail |
@@ -32,18 +30,18 @@ Choisis la vue qui s'affiche automatiquement quand tu lances DockSky :
 
 ## Notifications
 
-Configuration des notifications système et des alertes :
+Configuration des notifications système et des alertes:
 - **Activer / désactiver** les notifications desktop
-- **Seuil d'alerte retard** — après combien de jours une action en retard génère une notification
-- **Rappels automatiques** — activer ou non les rappels du Watchdog
+- **Seuil d'alerte retard**   après combien de jours une action en retard génère une notification
+- **Rappels automatiques**   activer ou non les rappels du Watchdog
 
 ---
 
 ## Bandeau permanent
 
-- **Raccourci clavier global** — la touche ou combinaison pour activer le bandeau depuis n'importe quelle app
-- **Position** — haut ou bas de l'écran
-- **Mode toujours visible** — conserver le bandeau au-dessus de toutes les fenêtres
+- **Raccourci clavier global**   la touche ou combinaison pour activer le bandeau depuis n'importe quelle app
+- **Position**   haut ou bas de l'écran
+- **Mode toujours visible**   conserver le bandeau au-dessus de toutes les fenêtres
 
 ---
 
@@ -57,8 +55,8 @@ Configuration des notifications système et des alertes :
 
 ## Thème et affichage
 
-- **Thème** : Sombre / Clair / Système
-- **Taille du texte** : normale, grande
+- **Thème**: Sombre / Clair / Système
+- **Taille du texte**: normale, grande
 - **Langue** de l'interface
 
 ---
@@ -66,41 +64,37 @@ Configuration des notifications système et des alertes :
 ## Intégration IA
 
 - **Autorisation de suppression IA** par projet (voir aussi [Corbeille IA](./corbeille))
-- **Profil IA** — texte injecté en tête de chaque export de contexte
+- **Profil IA**   texte injecté en tête de chaque export de contexte
 
 ### Accès IA (token MCP)
 
-Section **🤖 Accès IA** — en bas de la page Paramètres :
-
-- Génère un **token IA** (`dk_ai_…`) pour connecter Cursor ou VS Code au serveur MCP DockSky
-- Quota : 500 appels/jour, validité 90 jours
-- Le token complet n'est affiché **qu'une seule fois** à la génération — copie-le immédiatement
+Section **🤖 Accès IA**   en bas de la page Paramètres: - Génère un **token IA** (`dk_ai_…`) pour connecter Cursor ou VS Code au serveur MCP DockSky
+- Quota: 500 appels/jour, validité 90 jours
+- Le token complet n'est affiché **qu'une seule fois** à la génération, copie-le immédiatement
 - **Révoquer** désactive le token actif
 
-→ Configuration MCP : [Synapse et MCP (Cursor)](../integration-ia/synapse-mcp-cursor)
+→ Configuration MCP: [Synapse et MCP (Cursor)](../integration-ia/synapse-mcp-cursor)
 
 ### Pilotage IA (Synapse)
 
-Sections disponibles avec un **plan Pro** DockSky App (`pro` ou `personal`) :
-
-| Section | Rôle |
+Sections disponibles avec un **plan Pro** DockSky App (`pro` ou `personal`): | Section | Rôle |
 |---------|------|
-| **🔐 Coffre Pilotage IA** | Secrets personnels référencés par `{{NOM}}` dans les commandes — valeurs jamais affichées |
+| **🔐 Coffre Pilotage IA** | Secrets personnels référencés par `{{NOM}}` dans les commandes, valeurs jamais affichées |
 | **🖥️ Mes machines Synapse** | Profils d'exécution (slug, conteneurs autorisés) pour `synapse_exec` |
-| **📋 Journal Synapse** | 30 dernières exécutions IA — stdout masqué, lecture seule |
+| **📋 Journal Synapse** | 30 dernières exécutions IA, stdout masqué, lecture seule |
 
 Sans plan Pro, ces sections sont grisées et une bannière indique la mise à niveau nécessaire.
 
-L'app ne propose **pas** de bouton pour exécuter des commandes : l'exécution passe par l'IA (MCP) ou l'API. L'app sert à configurer et surveiller.
+L'app ne propose **pas** de bouton pour exécuter des commandes: l'exécution passe par l'IA (MCP) ou l'API. L'app sert à configurer et surveiller.
 
-→ Documentation complète : [Pilotage IA (Synapse)](../integration-ia/pilotage-ia-synapse)
+→ Documentation complète: [Pilotage IA (Synapse)](../integration-ia/pilotage-ia-synapse)
 
 ---
 
 ## Compte
 
 - **Déconnexion** de la session DockSky
-- **Synchronisation** — forcer une resynchronisation complète avec le serveur
+- **Synchronisation**   forcer une resynchronisation complète avec le serveur
 
 ---
 
