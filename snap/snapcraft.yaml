@@ -1,0 +1,52 @@
+name: docksky
+title: DockSky
+summary: Mémoire de projet et collaboration IA MCP pour travailleurs solo
+
+description: |
+  Travaille avec l'IA sans tout réexpliquer à chaque session.
+
+  DockSky est une application desktop (Linux) pour la vraie collaboration
+  avec l'IA, quelle qu'elle soit. Ton contexte vit chez toi : projets,
+  décisions, facettes, journal. L'IA s'y branche via MCP (Cursor, Claude,
+  etc.) au lieu de repartir d'un chat vide.
+
+  • Bandeau permanent et capture instantanée : tu restes dans ton flux
+  • Structure Projet → Étape → Action : continuité sur des semaines
+  • Facettes et serveur MCP : contexte exact, lisible et actionnable
+  • Pour freelances, développeurs et créatifs en solo
+
+  Particulièrement utile si tu perds le fil entre deux sessions (profils
+  TDA/atypiques bienvenus, ce n'est pas le sujet principal, c'est un plus).
+
+  Mises à jour automatiques via le Snap Store (snapd).
+
+contact: contact@docksky.fr
+license: Proprietary
+website: https://docksky.fr
+source-code: https://github.com/DockSky/DockSky-release/tree/main/snap
+
+grade: stable
+confinement: classic
+base: core22
+adopt-info: metadata
+
+architectures:
+  - amd64
+
+apps:
+  docksky:
+    command: bin/DockSky
+    common-id: fr.docksky.DockSky
+
+parts:
+  docksky:
+    plugin: dump
+    source: dist/linux-x64
+    organize:
+      "*": bin/
+  metadata:
+    plugin: nil
+    source: .
+    override-build: |
+      set -eu
+      craftctl set version="${DOCKSKY_SNAP_VERSION:-devel}"
