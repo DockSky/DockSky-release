@@ -26,27 +26,54 @@ website: https://docksky.fr
 source-code: https://github.com/DockSky/DockSky-release/tree/main/snap
 
 grade: stable
-confinement: classic
+confinement: strict
 base: core22
-adopt-info: metadata
+version: "devel"
 
 architectures:
   - amd64
+
+plugs:
+  config-docksky:
+    interface: personal-files
+    read:
+      - $HOME/.config/DockSky
+    write:
+      - $HOME/.config/DockSky
+  data-docksky:
+    interface: personal-files
+    read:
+      - $HOME/.local/share/DockSky
+    write:
+      - $HOME/.local/share/DockSky
 
 apps:
   docksky:
     command: bin/DockSky
     common-id: fr.docksky.DockSky
+    environment:
+      DOTNET_BUNDLE_EXTRACT_BASE_DIR: $SNAP_USER_COMMON/dotnet_bundle_extract
+      LD_LIBRARY_PATH: $SNAP/lib:$LD_LIBRARY_PATH
+    plugs:
+      - home
+      - config-docksky
+      - data-docksky
+      - network
+      - network-bind
+      - x11
+      - wayland
+      - desktop
+      - desktop-legacy
+      - unity7
 
 parts:
+  docksky-libs:
+    plugin: dump
+    source: dist/linux-x64-libs
+    organize:
+      "*": lib/
   docksky:
     plugin: dump
     source: dist/linux-x64
     organize:
       "*": bin/
-  metadata:
-    plugin: nil
-    source: .
-    override-build: |
-      set -eu
-      craftctl set version="${DOCKSKY_SNAP_VERSION:-devel}"
