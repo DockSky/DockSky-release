@@ -33,38 +33,27 @@ version: "devel"
 architectures:
   - amd64
 
-plugs:
-  config-docksky:
-    interface: personal-files
-    read:
-      - $HOME/.config/DockSky
-    write:
-      - $HOME/.config/DockSky
-  data-docksky:
-    interface: personal-files
-    read:
-      - $HOME/.local/share/DockSky
-    write:
-      - $HOME/.local/share/DockSky
-
 apps:
   docksky:
     command: bin/DockSky
     common-id: fr.docksky.DockSky
     environment:
+      # Config/data dans l'espace snap (évite personal-files super-privilégié)
+      XDG_CONFIG_HOME: $SNAP_USER_COMMON/.config
+      XDG_DATA_HOME: $SNAP_USER_COMMON/.local/share
+      # .NET single-file : ~/.cache non accessible en strict → dossier snap writable
       DOTNET_BUNDLE_EXTRACT_BASE_DIR: $SNAP_USER_COMMON/dotnet_bundle_extract
+      # libicu embarquée (core22) — invisible en strict hors $SNAP
       LD_LIBRARY_PATH: $SNAP/lib:$LD_LIBRARY_PATH
     plugs:
       - home
-      - config-docksky
-      - data-docksky
       - network
       - network-bind
       - x11
       - wayland
       - desktop
       - desktop-legacy
-      - unity7
+      - opengl
 
 parts:
   docksky-libs:
