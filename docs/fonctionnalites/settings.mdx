@@ -77,13 +77,15 @@ Section **🤖 Accès IA**   en bas de la page Paramètres: - Génère un **toke
 
 ### Pilotage IA (Synapse)
 
-Sections disponibles avec un **plan Pro** DockSky App (`pro` ou `personal`): | Section | Rôle |
+Sections disponibles pour tout compte **Bandeau** (Free inclus, quotas selon le plan):
+
+| Section | Rôle |
 |---------|------|
 | **🔐 Coffre Pilotage IA** | Secrets personnels référencés par `{{NOM}}` dans les commandes, valeurs jamais affichées |
 | **🖥️ Mes machines Synapse** | Profils d'exécution (slug, conteneurs autorisés) pour `synapse_exec` |
 | **📋 Journal Synapse** | 30 dernières exécutions IA, stdout masqué, lecture seule |
 
-Sans plan Pro, ces sections sont grisées et une bannière indique la mise à niveau nécessaire.
+L'exécution **`synapse_exec` via MCP** (Cursor) requiert le plan **Pro** (scope `mcp:synapse`). Voir [Tarifs et plans](../concepts/tarifs-plans).
 
 L'app ne propose **pas** de bouton pour exécuter des commandes: l'exécution passe par l'IA (MCP) ou l'API. L'app sert à configurer et surveiller.
 

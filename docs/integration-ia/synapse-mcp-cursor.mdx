@@ -58,9 +58,9 @@ Redémarre Cursor ou recharge la fenêtre VS Code pour que le serveur MCP soit d
 
 ## Étape 3: Préparer Synapse
 
-Avant de demander à l'IA d'exécuter quoi que ce soit :
+Avant de demander à l'IA d'exécuter quoi que ce soit via **`synapse_exec`** (scope `mcp:synapse`, plan **Pro**):
 
-1. Plan **Pro** actif
+1. Compte Bandeau avec Synapse activé (tous les plans, quotas selon Free/Pro)
 2. Secrets enregistrés dans le **Coffre Pilotage IA**
 3. Au moins une **machine** configurée
 
@@ -85,7 +85,7 @@ Accessibles avec le token généré par défaut dans l'app :
 
 ### Écriture et exécution (`mcp:synapse`)
 
-Requièrent le scope **`mcp:synapse`** en plus du plan Pro :
+Requièrent le scope **`mcp:synapse`**, attribué aux comptes **Pro / Équipage**:
 
 | Outil | Description |
 |-------|-------------|
@@ -200,14 +200,15 @@ curl -sS -X POST 'https://api.docksky.fr/synapse/exec' \
 
 | Plan | Scopes typiques |
 |------|-----------------|
-| Free / Plus | `mcp:read` |
-| **Pro** | `mcp:read`, `mcp:write`, **`mcp:synapse`** |
+| **Free** | `mcp:read`, `mcp:write` |
+| **Plus** *(bientôt)* | `mcp:read`, `mcp:write` |
+| **Pro / Équipage** | `mcp:read`, `mcp:write`, **`mcp:synapse`** |
 
 | Scope | Outils débloqués |
 |-------|------------------|
-| `mcp:read` | Contexte projet, facettes, `synapse_list_*` |
-| `mcp:write` | `update_*`, `add_*` sur la base TDA |
-| `mcp:synapse` | `synapse_exec`, machines, secrets (`synapse_put/delete_secret`…) |
+| `mcp:read` | Contexte projet, facettes, `synapse_list_*`, lecture roadmap |
+| `mcp:write` | `update_*`, `add_*`, Knowledge, idées, facettes |
+| `mcp:synapse` | `synapse_exec`, création/suppression machines et secrets |
 
 :::info Token Pro = Synapse actif
 Avec un plan **Pro**, régénère ton token une fois si tu l'avais créé avant l'activation des scopes persistés. Tu dois voir `mcp:synapse` dans Paramètres → Accès IA, et `synapse_exec` dans `tools/list` côté Cursor.
@@ -261,7 +262,7 @@ Au-delà, l'API renvoie HTTP **429** avec `Retry-After`.
 
 | Message | Cause probable |
 |---------|----------------|
-| `Pilotage IA Synapse réservé au plan Pro` | Plan gratuit, passe au Pro |
+| `Pilotage IA Synapse réservé au plan Pro` | Token sans scope `mcp:synapse` (passe Pro ou Équipage) |
 | `Secret manquant pour le placeholder {{X}}` | Secret non enregistré dans le coffre |
 | `Machine introuvable` | Slug incorrect ou machine supprimée |
 | `Conteneur non autorisé` | Conteneur absent de la liste de la machine |

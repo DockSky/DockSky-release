@@ -63,19 +63,20 @@ L'exécution passe par l'IA connectée en MCP (`synapse_exec`) ou par l'API REST
 
 ## Prérequis
 
-1. **Plan Pro DockSky App** (`pro`), requis pour créer des secrets, des machines et exécuter des commandes
-2. **Token IA** généré dans Paramètres → Accès IA
-3. **Au moins une machine** enregistrée avec des conteneurs autorisés
-4. **Secrets** dans le coffre pour chaque placeholder utilisé dans les commandes
+1. **Compte DockSky App** avec Synapse activé (Free ou Pro)
+2. Pour **`synapse_exec` via MCP** : plan **Pro / Équipage** (scope `mcp:synapse`)
+3. **Token IA** généré dans Paramètres → Accès IA
+4. **Au moins une machine** enregistrée avec des conteneurs autorisés
+5. **Secrets** dans le coffre pour chaque placeholder utilisé dans les commandes
 
-Sans plan Pro, les sections Pilotage IA sont grisées et une bannière t'indique de passer au plan Pro.
+Sans compte Bandeau, les sections Pilotage IA restent désactivées.
 
 ---
 
 ## Parcours type (5 minutes)
 
-1. Passe au **plan Pro** si ce n'est pas déjà fait
-2. **Paramètres → Accès IA** : génère un token, copie-le immédiatement
+1. Vérifie que **Synapse** est actif (compte Bandeau, voir [Tarifs](../concepts/tarifs-plans))
+2. **Paramètres → Accès IA** : génère un token Pro si tu veux `synapse_exec` via MCP
 3. **Paramètres → Coffre Pilotage IA** : enregistre `DB_USER`, `DB_PASS`, etc.
 4. **Paramètres → Mes machines Synapse** : crée une machine (ex. slug `mon-vps`, conteneurs `mon_app`)
 5. Configure **Cursor** ou **VS Code** avec le serveur MCP DockSky → voir [Synapse et MCP](./synapse-mcp-cursor)

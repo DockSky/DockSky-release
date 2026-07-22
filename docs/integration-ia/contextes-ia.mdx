@@ -19,7 +19,7 @@ Un **groupe de contexte** est une sélection nommée de notes de facettes. Tu en
 
 - *Session backend* → config env dev + accès VPS + pattern FastAPI
 - *Session Avalonia* → conventions MVVM + TRAPs Avalonia + règles de nommage
-- *Session LRVB* → notes de personnages + fil narratif + décisions éditoriales
+- *Session roman* → notes de personnages + fil narratif + décisions éditoriales
 
 Chaque note peut appartenir à **plusieurs groupes** à la fois. Tu ne duppliques rien.
 
@@ -39,7 +39,7 @@ Choisis le projet concerné dans le menu déroulant en haut à gauche. Les group
 
 Tape un nom dans le champ *"Nom du nouveau groupe…"* et clique sur **＋**.
 
-> **Exemples de noms** : `Session backend`, `Briefing LRVB Tome 2`, `Infra VPS`
+> **Exemples de noms** : `Session backend`, `Briefing chapitre 4`, `Infra VPS`
 
 ### 4. Cocher les notes à inclure
 
@@ -119,6 +119,19 @@ Le texte généré suit un format structuré que toutes les IA comprennent :
   ]
 }
 ```
+
+---
+
+## Via MCP : `charge_contexte`
+
+Si tu utilises **Cursor** ou **VS Code** avec le serveur MCP DockSky, l'outil **`charge_contexte`** charge automatiquement les bons groupes de contexte (ou résout selon la tâche en cours).
+
+Paramètres utiles:
+- `groups` : noms ou IDs de groupes Contextes IA à forcer
+- `task` : description de la session → sélection automatique des groupes pertinents
+- `include_project` : inclure le résumé projet (défaut: oui)
+
+C'est l'équivalent programmatique du bouton **Copier JSON**, optimisé pour les agents IA. Voir [Synapse et MCP (Cursor)](./synapse-mcp-cursor).
 
 ---
 

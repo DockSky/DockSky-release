@@ -1,9 +1,9 @@
 ---
 sidebar_position: 1
-title: Projets, Actions, Étapes
+title: Projets, Étapes, Actions
 ---
 
-# Projets, Actions, Étapes
+# Projets, Étapes, Actions
 
 DockSky organise ton travail en trois niveaux imbriqués. Cette hiérarchie est simple par design, assez structurée pour ne pas te perdre, assez souple pour s'adapter à n'importe quel type de projet.
 
@@ -11,8 +11,8 @@ DockSky organise ton travail en trois niveaux imbriqués. Cette hiérarchie est 
 
 ```
 Projet
-└── Action
-    └── Étape
+└── Étape
+    └── Action
 ```
 
 ### Projet
@@ -25,30 +25,32 @@ Chaque projet a:
 - ses propres **Facettes** (mémoire structurée, voir [Facettes](./facettes))
 - un **accès IA** configurable (partager ou non le contexte avec ton IA)
 
-### Action
-
-Une action est une grande tâche à l'intérieur d'un projet. Elle correspond à une fonctionnalité, un chapitre, une démarche, un livrable. Elle regroupe des étapes.
-
 ### Étape
 
-Une étape est le grain le plus fin: une tâche concrète, réalisable en une session de travail.
+Une **étape** est une phase ou un livrable dans ton projet: un chapitre, une fonctionnalité, une démarche, un jalon. Elle regroupe des **actions** concrètes.
+
+### Action
+
+Une **action** est le grain le plus fin: une tâche réalisable en une session de travail, rattachée à une étape (ou « libre » en attendant d'être planifiée).
 
 :::tip Conseil TDA
-Décomposer jusqu'à l'étape évite la paralysie face à une tâche vague.
+Décomposer jusqu'à l'action évite la paralysie face à une tâche vague.
 
-"Rédiger le roman" → c'est un projet.  
-"Écrire le chapitre 3" → c'est une action.  
-"Écrire la scène d'ouverture du chapitre 3" → c'est une étape.
+"Rédiger le roman" → c'est un **projet**.  
+"Écrire le chapitre 3" → c'est une **étape**.  
+"Écrire la scène d'ouverture du chapitre 3" → c'est une **action**.
 
-L'étape doit être suffisamment petite pour que tu puisses répondre à "est-ce que c'est fait ?" par oui ou non.
+L'action doit être suffisamment petite pour que tu puisses répondre à "est-ce que c'est fait ?" par oui ou non.
 :::
 
 ---
 
 ## Actions planifiées vs actions libres
 
-Une action peut exister dans DockSky à deux états: - **Planifiée sur la roadmap**   elle est rattachée à une étape. Elle apparaît dans la Roadmap et le Today Dashboard.
-- **Libre**   elle n'a pas encore d'étape assignée. Elle reste visible dans la vue [Actions libres](../fonctionnalites/actions-libres).
+Une action peut exister dans DockSky à deux états:
+
+- **Planifiée sur la roadmap** : elle est rattachée à une **étape**. Elle apparaît dans la Roadmap et le Today Dashboard.
+- **Libre** : elle n'a pas encore d'étape assignée. Elle reste visible dans la vue [Actions libres](../fonctionnalites/actions-libres).
 
 Ce n'est pas un défaut: c'est une étape normale du workflow. Tu captures d'abord, tu planifies ensuite.
 
@@ -61,22 +63,22 @@ Capture rapide (bandeau)
 ```
 
 :::tip
-Une action peut appartenir à un projet **sans** être sur la roadmap. "A un projet" et "est planifiée" sont deux choses différentes.
+Une action peut appartenir à un projet **sans** être sur la roadmap. « A un projet » et « est planifiée » sont deux choses différentes.
 :::
 
 ---
 
 ## La Roadmap
 
-La vue **Roadmap** affiche l'ensemble de tes projets actifs avec leurs actions en cours. C'est ta vue stratégique: où tu en es, ce qui avance, ce qui est bloqué.
+La vue **Roadmap** affiche l'ensemble de tes projets actifs avec leurs **étapes** et **actions** en cours. C'est ta vue stratégique: où tu en es, ce qui avance, ce qui est bloqué.
 
 ## Le Today Dashboard
 
-Le **Today Dashboard** filtre ce qui est à faire aujourd'hui. Il affiche aussi les **Quick Wins**   les étapes courtes et faciles à enchaîner quand tu as un coup de mou mais que tu veux quand même avancer.
+Le **Today Dashboard** filtre ce qui est à faire aujourd'hui. Il affiche aussi les **Quick Wins** : des actions courtes et faciles à enchaîner quand tu as un coup de mou mais que tu veux quand même avancer.
 
 ## Statuts et suivi
 
-Chaque action et chaque étape a un statut: **à faire**, **en cours**, **terminé(e)**. Cocher une étape déclenche la gamification (points, récompenses) si elle est activée.
+Chaque étape et chaque action a un statut: **à faire**, **en cours**, **terminé(e)**. Cocher une action déclenche la gamification (points, récompenses) si elle est activée.
 
 ---
 
@@ -85,11 +87,11 @@ Chaque action et chaque étape a un statut: **à faire**, **en cours**, **termin
 | Niveau | Exemple |
 |--------|---------|
 | Projet | Développer l'application DockSky |
-| Action | Implémenter la vue Facettes |
-| Étape | Créer le dialog d'édition d'entrée |
+| Étape | Implémenter la vue Facettes |
+| Action | Créer le dialog d'édition d'entrée |
 
 | Niveau | Exemple |
 |--------|---------|
 | Projet | Écrire mon roman |
-| Action | Rédiger le Tome 1 |
-| Étape | Écrire la scène du pont, chapitre 4 |
+| Étape | Rédiger le Tome 1 |
+| Action | Écrire la scène du pont, chapitre 4 |

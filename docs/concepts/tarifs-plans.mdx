@@ -1,0 +1,64 @@
+---
+sidebar_position: 5
+title: Tarifs et plans
+---
+
+# Tarifs et plans
+
+DockSky est en **accès anticipé**. Les offres payantes (Plus, Pro) arrivent progressivement. Le **plan Free** est utilisable dès maintenant.
+
+Détail à jour sur [docksky.fr](https://docksky.fr/#tarifs).
+
+---
+
+## Plans DockSky App
+
+| Plan | Prix (cible) | Projets | Actions / mois | Stockage | MCP |
+|------|--------------|---------|----------------|----------|-----|
+| **Free** | 0 € | 3 actifs | 100 créations | 50 Mo | Lecture + écriture TDA (pas Synapse exec) |
+| **Plus** | 3,90 €/mois *(bientôt)* | Illimités | 500 | 250 Mo | Idem Free |
+| **Pro** | 9,90 €/mois *(bientôt)* | Illimités | Illimitées | 2 Go | + scope `mcp:synapse` (exec infra) |
+| **Équipage** | Invitation | Pro offert en beta | Idem Pro | Idem Pro | Idem Pro |
+
+:::info Qu'est-ce qu'une « action » ?
+Une **action** = un objet **créé** ce mois-ci (tâche, entrée journal, idée, entrée facette, note knowledge). Les modifications ne comptent pas.
+:::
+
+---
+
+## Équipage (beta)
+
+Les testeurs invités reçoivent un code **DSK-…** et passent en **Pro** pendant la beta. Demande d'accès: [docksky.fr/equipage](https://docksky.fr/equipage) ou formulaire contact.
+
+---
+
+## MCP et Pilotage IA
+
+| Capacité | Free | Pro / Équipage |
+|----------|------|----------------|
+| Token MCP (`dk_ai_…`) | Oui | Oui |
+| Scopes | `mcp:read`, `mcp:write` | + `mcp:synapse` |
+| Lire/écrire projets, facettes, journal | Oui | Oui |
+| `synapse_exec` (commandes infra via Cursor) | Non | Oui |
+
+Le serveur MCP expose **62 outils** au total (TDA + Synapse). Voir [Synapse et MCP](../integration-ia/synapse-mcp-cursor).
+
+---
+
+## Pilotage IA (Synapse) dans l'app
+
+Tout compte **Bandeau** (Free inclus) active Synapse avec des **quotas**:
+
+| Quota | Free Synapse | Pro Synapse |
+|-------|--------------|-------------|
+| Exécutions / mois | 250 | 25 000 |
+| Secrets | 5 | 500 |
+| Machines | 1 | 10 |
+
+Configuration dans **Paramètres → Coffre / Machines / Journal**. L'exécution via **Cursor** (`synapse_exec`) reste réservée au **plan Pro** (scope MCP).
+
+---
+
+## Langues
+
+L'interface est disponible en **français, anglais, espagnol et allemand** (Paramètres → Langue).
