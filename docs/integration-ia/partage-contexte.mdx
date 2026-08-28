@@ -1,57 +1,69 @@
 ---
 sidebar_position: 1
-title: Partage de contexte automatique
+title: Partage de contexte avec l'IA
 ---
 
-# Partage de contexte automatique
+# Partage de contexte avec l'IA
 
-Plutôt que de copier-coller le contexte à chaque session, tu peux configurer ton IA pour qu'elle récupère ton contexte DockSky automatiquement à chaque conversation, sans aucune action de ta part.
-
----
-
-## Comment ça fonctionne
-
-Quand tu actives l'accès IA sur un projet, DockSky génère un **lien unique** vers le contexte de ce projet. Tu configures ton IA préférée pour qu'elle consulte ce lien à chaque début de conversation.
-
-Le lien reste à jour automatiquement: quand tu modifies tes Facettes, l'IA dispose du nouveau contexte dès la prochaine conversation.
+DockSky ne propose **pas** de lien public auto-mis à jour vers ton contexte projet. Le partage passe par des méthodes explicites que tu contrôles : copier-coller, packs **Contextes IA**, ou connexion **MCP**.
 
 ---
 
-## Activer l'accès IA sur un projet
+## Niveau d'accès IA par projet
 
-1. Ouvre ton projet (vue **Projets**)
-2. Clique sur les paramètres du projet (icône ⚙️)
-3. Active l'option **Accès IA**
-4. Choisis le niveau d'accès: - **Lecture**   ton IA peut lire les Facettes (recommandé)
-   - **Écriture**   ton IA peut aussi ajouter des notes
-5. Copie le **lien de contexte** généré
+Chaque projet a un réglage **Accès IA** (`NONE` / `READ` / `WRITE`) :
 
----
+1. Ouvre ton projet (vue **Projets** → détail du projet)
+2. Section **Accès IA** : choisis le niveau
+   - **NONE** — le projet est invisible pour le MCP (et filtré côté outils IA)
+   - **READ** — lecture seule (facettes, journal, roadmap…)
+   - **WRITE** — lecture + écriture (création/mise à jour d'entrées, selon permissions)
 
-## Configurer Claude
-
-1. Va dans Claude → **Settings** → **Custom Instructions** (ou "Instructions système")
-2. Ajoute une instruction du type: ```
-Début de chaque conversation: consulte mon contexte de projet à l'adresse [LIEN DOCKSKY].
-Base tes réponses sur ce contexte.
-```
+Ce réglage s'applique au **serveur MCP** et aux exports manuels : il ne génère pas d'URL publique.
 
 ---
 
-## Configurer ChatGPT (Custom GPT)
+## Méthode 1 : Copier le JSON (immédiat)
 
-1. Crée un **Custom GPT** (assistant ChatGPT personnalisé) dans ChatGPT
-2. Dans les instructions, ajoute le lien DockSky et demande à GPT de le consulter
-3. Utilise ce GPT pour tes sessions liées à ce projet
+1. Vue **Facettes** ou **Contextes IA**
+2. Sélectionne les notes pertinentes
+3. Clique **Copier JSON**
+4. Colle en début de conversation dans Claude, ChatGPT, etc.
+
+→ Détail : [Utiliser DockSky avec ton IA](./configurer-son-llm) · [Contextes IA](./contextes-ia)
 
 ---
 
-## Révoquer l'accès
+## Méthode 2 : Contextes IA (packs réutilisables)
 
-Si tu veux révoquer l'accès (bloquer le lien existant et en générer un nouveau): 1. Ouvre les paramètres du projet
-2. Clique sur **Révoquer l'accès**
-3. Un nouveau lien est généré, l'ancien ne fonctionne plus
+Crée des groupes nommés (« Session backend », « Briefing client X ») et réutilise-les session après session.
+
+→ [Contextes IA](./contextes-ia)
+
+---
+
+## Méthode 3 : MCP DockSky (Cursor / VS Code)
+
+Pour une intégration native et à jour en continu :
+
+1. **Paramètres → Accès IA** : génère un token `dk_ai_…`
+2. Configure le serveur MCP (`https://api.docksky.fr/tda/mcp`, header `X-AI-Token`)
+3. L'IA appelle `docksky_boot`, `docksky_load`, `get_facet_context`, etc.
+
+Les projets en accès **NONE** sont exclus ; **WRITE** est requis pour les suppressions de facettes (si autorisées dans tes paramètres).
+
+→ [Synapse et MCP (Cursor)](./synapse-mcp-cursor)
+
+---
+
+## Ce qui n'existe pas (encore)
+
+| Fonctionnalité | État |
+|----------------|------|
+| Lien HTTP public vers le contexte d'un projet | Non disponible |
+| Injection automatique dans Claude / ChatGPT sans MCP | Non — copier-coller ou MCP |
+| Révocation d'un « lien de contexte » | N/A — révoque plutôt ton **token MCP** dans Paramètres |
 
 :::caution
-Si tu as partagé ce lien avec quelqu'un ou configuré plusieurs outils avec, pense à mettre à jour chaque configuration après la révocation.
+Ne configure pas d'instruction système du type « consulte mon URL DockSky » : ce mécanisme n'est pas implémenté. Utilise MCP ou le JSON copié.
 :::

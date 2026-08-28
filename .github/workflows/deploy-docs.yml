@@ -12,7 +12,8 @@ on:
       - 'sidebars.ts'
       - 'package.json'
       - 'package-lock.json'
-      - '.github/workflows/deploy-docs.yml'
+      - 'docker-compose.yml'
+      - 'nginx.conf'
   workflow_dispatch:
 
 concurrency:

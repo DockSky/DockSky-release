@@ -9,15 +9,17 @@ Historique des versions de DockSky.
 
 ---
 
-## v0.9.403 (juillet 2026)
+## v0.9.403+ (2026)
 
-Version courante. Téléchargements: [GitHub Releases](https://github.com/DockSky/DockSky-release/releases/latest) · [docksky.fr/telecharger](https://docksky.fr/telecharger)
+Version courante. Téléchargements : [docksky.fr/telecharger](https://docksky.fr/telecharger) (canal officiel).
 
 ### Points saillants
 
-- Releases Windows + Linux (Setup, AppImage, Portable)
-- Site docksky.fr aligné 0.9.403
-- Documentation utilisateur: corrections hiérarchie Projet → Étape → Action, onboarding, tarifs, Synapse/MCP
+- **Windows** : distribution **Microsoft Store uniquement** (plus d'installateur `.exe` ni de zip portable pour les utilisateurs finaux)
+- **Linux** : AppImage (Velopack) + script `curl -fsSL https://docksky.fr/install.sh | bash` ; Snap en cours de publication
+- Plans Free / Équipage (code **DSK-…** à l'inscription) / offres payantes à venir
+- MCP : `https://api.docksky.fr/tda/mcp` avec scopes `mcp:read`, `mcp:write`, `mcp:synapse` (Pro / Équipage)
+- Site docksky.fr aligné (Store-only, parcours Équipage, FAQ tarifs)
 
 ---
 
@@ -35,15 +37,17 @@ v0.9.338: Version stable Windows + Linux (mai 2026)
 
 Version majeure: DockSky est maintenant disponible sur **Windows et Linux**. L'exécutable est renommé `DockSky` sur toutes les plateformes.
 
-### Téléchargement
+### Téléchargement (historique v0.9.338)
 
-**Windows**
-- [DockSky-Setup-0.9.338.exe](https://github.com/DockSky/DockSky-release/releases/latest/download/DockSky-Setup-0.9.338.exe): Installateur Windows (recommandé)
-- [DockSky-win-Portable.zip](https://github.com/DockSky/DockSky-release/releases/latest/download/DockSky-win-Portable.zip): Version portable Windows
+:::note Canaux actuels
+Depuis 2026, **Windows** passe par le **Microsoft Store** uniquement. **Linux** : AppImage ou script d'installation — voir [Installation](../premiers-pas/installation).
+:::
+
+**Windows (obsolète — ne plus distribuer aux utilisateurs finaux)**
+- Installateur `.exe` et zip portable GitHub (remplacés par le Store)
 
 **Linux**
-- [DockSky-linux-x64-0.9.338.tar.gz](https://github.com/DockSky/DockSky-release/releases/latest/download/DockSky-linux-x64-0.9.338.tar.gz): Archive Linux x64
-- [docksky_0.9.338_amd64.deb](https://github.com/DockSky/DockSky-release/releases/latest/download/docksky_0.9.338_amd64.deb): Paquet Debian/Ubuntu
+- AppImage et archives GitHub Releases (toujours valides pour Linux)
 
 ### Nouveautés
 
@@ -54,8 +58,8 @@ Version majeure: DockSky est maintenant disponible sur **Windows et Linux**. L'e
 - Routines, création, types, modes, déclencheurs, templates
 - Roadmap et Quick Wins
 - Pomodoro flottant (widget toujours visible)
-- Vue Kanban des tâches
-- Inbox (capture rapide depuis n'importe où)
+- Vues **Tâches** et **Backlog** (actions hors roadmap)
+- **Inbox** (notifications agrégées : retards, rappels, badges)
 - Compagnon virtuel Bretton Spaniel (animations physiques, bulles de dialogue)
 - Mode démo intégré (exploration avec données d'exemple, **après** connexion)
 - Onboarding initial guidé (compte + vérification email)

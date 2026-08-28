@@ -17,8 +17,8 @@ Synapse s'utilise principalement via le **protocole MCP** (Model Context Protoco
 4. **Copie le token immédiatement**, il commence par `dk_ai_` et ne sera plus affiché
 
 Caractéristiques du token généré par l'app :
-- **Quota** : 500 appels par jour
-- **Validité** : 90 jours
+- **Quota journalier** : plafond selon ton plan (Free **100** · Plus **300** · Pro **1000** appels/jour)
+- **Validité** : **30 jours** par défaut (configurable à la création via l'API)
 - **Un seul token actif** à la fois (un nouveau token révoque l'ancien)
 
 :::warning Ne partage jamais ton token
@@ -243,7 +243,7 @@ Tu retrouves l'exécution dans **Paramètres → Journal Synapse**.
 | Exécutions Synapse | **30 / minute** par utilisateur |
 | Appels MCP (IP normale) | 200 / minute |
 | Appels MCP (IP de confiance) | 400 / minute, après un premier appel MCP valide avec ton token, ton IP est mémorisée **24 h** dans Redis (whitelist temporaire, pas d'auto-ban sur le trafic MCP) |
-| Quota token IA | 500 / jour par défaut (configurable à la création) |
+| Quota token IA | Plafond **plan** (100 / 300 / 1000 par jour) — affiché dans Paramètres → Accès IA |
 
 Au-delà, l'API renvoie HTTP **429** avec `Retry-After`.
 
@@ -268,7 +268,7 @@ Au-delà, l'API renvoie HTTP **429** avec `Retry-After`.
 | `Conteneur non autorisé` | Conteneur absent de la liste de la machine |
 | `Synapse rate limit exceeded` | Trop d'exec en 1 minute, attends 60 s |
 | Outil `synapse_exec` absent de `tools/list` | Scope `mcp:synapse` manquant sur le token |
-| `Quota journalier IA atteint` | 500 appels MCP/jour dépassés, attends le lendemain |
+| `Quota journalier IA atteint` | Plafond du plan dépassé — attends le lendemain ou passe Plus/Pro |
 
 ---
 

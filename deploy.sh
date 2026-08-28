@@ -37,8 +37,10 @@ if [[ "${1:-}" == "--push-only" ]]; then
 fi
 
 if [[ "${1:-}" == "--git-only" ]]; then
-  echo "[1/1] Sync git sur VPS (origin/main)..."
+  echo "[1/2] Sync git sur VPS (origin/main)..."
   sync_vps_git
+  echo "[2/2] Recreate conteneur (nginx.conf / compose)..."
+  ssh docksky-vps "cd $VPS_DIR && docker compose up -d"
   echo ""
   echo "=== Deploy terminé ! https://docs.docksky.fr ==="
   exit 0
@@ -74,7 +76,8 @@ rsync -az --delete build/ "docksky-vps:${VPS_DIR}/build/"
 echo "[3/4] Sync git VPS (évite conflit rsync vs git pull)..."
 sync_vps_git
 
-echo "[4/4] Vérification conteneur..."
+echo "[4/4] Recreate conteneur (nginx.conf / compose)..."
+ssh docksky-vps "cd $VPS_DIR && docker compose up -d"
 ssh docksky-vps "docker ps --filter name=$CONTAINER --format 'Status: {{.Status}}'"
 
 echo ""

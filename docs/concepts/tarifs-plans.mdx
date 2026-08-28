@@ -15,10 +15,10 @@ Détail à jour sur [docksky.fr](https://docksky.fr/#tarifs).
 
 | Plan | Prix (cible) | Projets | Actions / mois | Stockage | MCP |
 |------|--------------|---------|----------------|----------|-----|
-| **Free** | 0 € | 3 actifs | 100 créations | 50 Mo | Lecture + écriture TDA (pas Synapse exec) |
-| **Plus** | 3,90 €/mois *(bientôt)* | Illimités | 500 | 250 Mo | Idem Free |
-| **Pro** | 9,90 €/mois *(bientôt)* | Illimités | Illimitées | 2 Go | + scope `mcp:synapse` (exec infra) |
-| **Équipage** | Invitation | Pro offert en beta | Idem Pro | Idem Pro | Idem Pro |
+| **Free** | 0 € | 3 actifs | 150 créations | 50 Mo | MCP TDA : `mcp:read` + `mcp:write` (100 appels/jour) |
+| **Plus** | 3,90 €/mois *(bientôt)* | Illimités | 500 | 250 Mo | MCP idem Free (300 appels/jour) |
+| **Pro** | 9,90 €/mois *(bientôt)* | Illimités | Illimitées | 2 Go | + scope `mcp:synapse` (`synapse_exec`, 1000 appels/jour) |
+| **Équipage** | Invitation | Pro offert | Idem Pro | Idem Pro | Idem Pro |
 
 :::info Qu'est-ce qu'une « action » ?
 Une **action** = un objet **créé** ce mois-ci (tâche, entrée journal, idée, entrée facette, note knowledge). Les modifications ne comptent pas.
@@ -26,9 +26,11 @@ Une **action** = un objet **créé** ce mois-ci (tâche, entrée journal, idée,
 
 ---
 
-## Équipage (beta)
+## Équipage
 
-Les testeurs invités reçoivent un code **DSK-…** et passent en **Pro** pendant la beta. Demande d'accès: [docksky.fr/equipage](https://docksky.fr/equipage) ou formulaire contact.
+Les membres invités reçoivent un code **DSK-…** à saisir **dans l'app**, à l'inscription. Il active le plan **Pro** gratuitement pendant la co-construction du produit.
+
+Ressources : [docksky.fr/equipage](https://docksky.fr/equipage) · [Guide Équipage](https://docksky.fr/equipage/guide) · [Parcours](https://docksky.fr/equipage/parcours)
 
 ---
 
@@ -38,6 +40,7 @@ Les testeurs invités reçoivent un code **DSK-…** et passent en **Pro** penda
 |----------|------|----------------|
 | Token MCP (`dk_ai_…`) | Oui | Oui |
 | Scopes | `mcp:read`, `mcp:write` | + `mcp:synapse` |
+| Appels MCP / jour (plafond plan) | 100 (Free) · 300 (Plus) | 1000 (Pro) |
 | Lire/écrire projets, facettes, journal | Oui | Oui |
 | `synapse_exec` (commandes infra via Cursor) | Non | Oui |
 

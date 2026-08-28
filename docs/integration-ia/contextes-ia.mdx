@@ -53,7 +53,7 @@ Dans le panneau central :
 La même note peut être dans plusieurs groupes. Par exemple, une note "accès VPS / ports" peut être utile à la fois dans *Session backend* et dans *Infra VPS*.
 :::
 
-### 5. Copier le contexte
+### 5. Copier le JSON
 
 Dans le panneau de droite, clique sur **📋 Copier JSON** (le texte structuré à coller dans ton IA). Le contexte est maintenant dans ton presse-papier, prêt à être collé.
 
@@ -122,14 +122,16 @@ Le texte généré suit un format structuré que toutes les IA comprennent :
 
 ---
 
-## Via MCP : `charge_contexte`
+## Via MCP : `docksky_load` (recommandé)
 
-Si tu utilises **Cursor** ou **VS Code** avec le serveur MCP DockSky, l'outil **`charge_contexte`** charge automatiquement les bons groupes de contexte (ou résout selon la tâche en cours).
+Si tu utilises **Cursor** ou **VS Code** avec le serveur MCP DockSky, préfère **`docksky_load`** pour charger les packs de contexte (ou **`docksky_boot`** en début de session).
 
-Paramètres utiles:
-- `groups` : noms ou IDs de groupes Contextes IA à forcer
+Paramètres utiles :
+- `groups` : noms de groupes Contextes IA à forcer
 - `task` : description de la session → sélection automatique des groupes pertinents
-- `include_project` : inclure le résumé projet (défaut: oui)
+- `facets` : facettes nommées à charger
+
+Legacy : l'outil **`charge_contexte`** reste disponible pour les anciens workflows.
 
 C'est l'équivalent programmatique du bouton **Copier JSON**, optimisé pour les agents IA. Voir [Synapse et MCP (Cursor)](./synapse-mcp-cursor).
 
