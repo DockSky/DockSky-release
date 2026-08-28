@@ -5,7 +5,9 @@
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
-    "build": "docusaurus build",
+    "format:mdx": "python3 scripts/format_mdx.py",
+    "format:mdx:check": "python3 scripts/format_mdx.py --check",
+    "build": "npm run format:mdx && docusaurus build",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "clear": "docusaurus clear",

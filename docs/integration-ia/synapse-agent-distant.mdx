@@ -42,7 +42,7 @@ sequenceDiagram
 ## Créer une machine agent
 
 `POST https://api.docksky.fr/synapse/machines`  
-Auth: `Authorization: Bearer <JWT>`   plan **Pro** requis.
+Auth: `Authorization: Bearer <JWT>` — plan **Pro** requis.
 
 ```json
 {
@@ -50,7 +50,7 @@ Auth: `Authorization: Bearer <JWT>`   plan **Pro** requis.
 }
 ```
 
-La réponse inclut `agent_token`   **copie-le immédiatement**, il ne sera plus affiché.
+La réponse inclut `agent_token` — **copie-le immédiatement**, il ne sera plus affiché.
 
 Équivalent MCP: outil `synapse_create_machine` avec `"machine_type": "agent"` (scope `mcp:synapse` requis).
 

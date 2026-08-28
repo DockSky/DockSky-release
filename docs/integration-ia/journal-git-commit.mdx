@@ -129,15 +129,25 @@ Pour une utilisation en CI/CD ou dans un script automatisé, il est préférable
 
 Les hooks git sont **locaux** (dans `.git/hooks/`) et ne se poussent pas sur GitHub. Sur un nouveau poste ou après un `git clone`, il faut les réinstaller.
 
-Un script global gère ça en une commande depuis `~/projets/` :
+Options courantes :
+
+1. **Recopier le hook** : crée `.git/hooks/post-commit` (contenu ci-dessus) et `chmod +x .git/hooks/post-commit`
+2. **Script perso** : un petit script qui boucle sur tes repos et y pose le même hook (chemins et credentials à toi)
+3. **`core.hooksPath`** : un dossier de hooks partagé pour plusieurs dépôts (`git config core.hooksPath ~/mes-hooks`)
+
+Exemple minimal pour installer le hook dans tous les repos d’un dossier :
 
 ```bash
-bash ~/projets/install-git-hooks.sh
+#!/usr/bin/env bash
+# install-hooks.sh — à adapter (chemins, credentials)
+HOOK_SRC="$HOME/mes-hooks/post-commit"
+for repo in "$HOME/projets"/*/.git; do
+  cp "$HOOK_SRC" "$(dirname "$repo")/hooks/post-commit"
+  chmod +x "$(dirname "$repo")/hooks/post-commit"
+done
 ```
 
-Au premier lancement, il demande tes credentials TDA et les stocke dans `~/.tda-credentials` (permissions `600`). Les lancements suivants réinstallent silencieusement les hooks dans tous les repos détectés.
-
-Les credentials ne sont **jamais** écrits dans les hooks eux-mêmes ni dans un fichier versionné.
+Stocke les credentials dans des **variables d'environnement** ou un fichier hors dépôt (permissions `600`). Ne les écris **jamais** dans un hook versionné.
 
 ---
 

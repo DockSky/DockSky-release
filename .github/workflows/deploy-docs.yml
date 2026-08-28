@@ -12,6 +12,7 @@ on:
       - 'sidebars.ts'
       - 'package.json'
       - 'package-lock.json'
+      - 'scripts/**'
       - 'docker-compose.yml'
       - 'nginx.conf'
   workflow_dispatch:
