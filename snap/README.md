@@ -6,7 +6,7 @@ Copie publique de `snap/snapcraft.yaml` pour la revue Snap Store (forum Snapcraf
 
 | Plug | Rôle |
 |------|------|
-| `home` | Accès aux dossiers projet (`~/Projects`, etc.) + file activity |
+| `home` | Accès aux dossiers projet (`~/Projects`, etc.) |
 | `network` / `network-bind` | API DockSky + serveur MCP local (localhost) |
 | `x11` / `wayland` / `desktop` / `opengl` | UI Avalonia + bandeau always-on-top |
 
