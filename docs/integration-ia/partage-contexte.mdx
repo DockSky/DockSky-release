@@ -61,9 +61,10 @@ Les projets en accès **NONE** sont exclus ; **WRITE** est requis pour les suppr
 | Fonctionnalité | État |
 |----------------|------|
 | Lien HTTP public vers le contexte d'un projet | Non disponible |
-| Injection automatique dans Claude / ChatGPT sans MCP | Non — copier-coller ou MCP |
+| MCP live dans **ChatGPT Free** | Non — OpenAI n'autorise pas de connecteur MCP custom. **V1 = copier-coller JSON**. Directory ChatGPT : plus tard, si assez d'utilisateurs |
+| Injection automatique dans Claude / ChatGPT sans MCP | Non — copier-coller, ou MCP si le client le permet |
 | Révocation d'un « lien de contexte » | N/A — révoque plutôt ton **token MCP** dans Paramètres |
 
 :::caution
-Ne configure pas d'instruction système du type « consulte mon URL DockSky » : ce mécanisme n'est pas implémenté. Utilise MCP ou le JSON copié.
+Ne configure pas d'instruction système du type « consulte mon URL DockSky » : ce mécanisme n'est pas implémenté. Utilise MCP (Claude Desktop, Cursor, VS Code, Zed) ou le JSON copié (ChatGPT et les autres).
 :::

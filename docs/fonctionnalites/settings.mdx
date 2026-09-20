@@ -30,6 +30,22 @@ Choisis la vue qui s'affiche automatiquement quand tu lances DockSky:
 
 ---
 
+## Modules actifs
+
+Dans **Paramètres → Modules actifs**, tu peux désactiver des blocs optionnels (ils disparaissent du menu tant qu'ils sont off) :
+
+| Module | Vues concernées |
+|--------|-----------------|
+| Pomodoro | Timer et stats |
+| Agenda | Calendrier |
+| Routines | Habitudes / Watchdog |
+| Gamification | Achievements |
+| Compagnon | Chien / bulles (sinon toast sur le bandeau) |
+
+Le cœur (projets, facettes, bandeau, MCP) reste toujours là.
+
+---
+
 ## Notifications
 
 Configuration des notifications système et des alertes:
@@ -67,6 +83,9 @@ Configuration des notifications système et des alertes:
 
 - **Autorisation de suppression IA** (Paramètres → Intégration IA, voir [Corbeille IA](./corbeille))
 - **Profil IA** — texte injecté en tête de chaque export de contexte
+- **Init IA** — client par machine : presse-papiers (défaut) ou Cursor (deeplink)
+
+Les écritures MCP suivent le mode **propose / ask / direct** (réglage compte + consentement de session). Quand c'est `propose` ou `ask`, tu confirmes dans **ProposalReview**. Détail : [Session MCP](../integration-ia/session-mcp).
 
 ### Accès IA (token MCP)
 
@@ -78,7 +97,7 @@ Section **🤖 Accès IA** — en bas de la page Paramètres :
 - Le token complet n'est affiché **qu'une seule fois** à la génération — copie-le immédiatement
 - **Révoquer** désactive le token actif
 
-→ Configuration MCP: [Synapse et MCP (Cursor)](../integration-ia/synapse-mcp-cursor)
+→ Configuration MCP: [Session MCP](../integration-ia/session-mcp) · [Synapse et MCP (Cursor)](../integration-ia/synapse-mcp-cursor)
 
 ### Pilotage IA (Synapse)
 
@@ -95,6 +114,19 @@ L'exécution **`synapse_exec` via MCP** (Cursor) requiert le plan **Pro** (scope
 L'app ne propose **pas** de bouton pour exécuter des commandes: l'exécution passe par l'IA (MCP) ou l'API. L'app sert à configurer et surveiller.
 
 → Documentation complète: [Pilotage IA (Synapse)](../integration-ia/pilotage-ia-synapse)
+
+---
+
+## Intégrations calendrier
+
+Section **Intégrations** :
+
+- **Google Calendar** — connexion OAuth, choix des agendas à synchroniser, option pour pousser tes événements locaux
+- **iCloud** — identifiant Apple + mot de passe d'application
+
+Un bouton **Synchroniser maintenant** force un passage. L'Agenda DockSky reste la vue locale ; le cloud est un miroir, pas un remplacement.
+
+→ [Agenda et Rappels](./agenda-rappels)
 
 ---
 

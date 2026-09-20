@@ -9,17 +9,29 @@ Historique des versions de DockSky.
 
 ---
 
-## v0.9.403+ (2026)
+## v0.9.403+ (courant, 2026)
 
-Version courante. Téléchargements : [docksky.fr/telecharger](https://docksky.fr/telecharger) (canal officiel).
+Version courante. Téléchargements : [docksky.fr/telecharger](https://docksky.fr/telecharger) (canal officiel). Le numéro mineur suit le compteur Git de l'app (`0.9.{commits}`).
 
-### Points saillants
+### Aligné au code (septembre 2026)
 
-- **Windows** : distribution **Microsoft Store uniquement** (plus d'installateur `.exe` ni de zip portable pour les utilisateurs finaux)
+- **Session MCP** : `docksky_boot` / `docksky_load` / `docksky_close` (aliases `dsk-boot`, `dsk-load`, `dsk-close`) — voir [Session MCP](../integration-ia/session-mcp)
+- **Écritures IA** : modes propose / ask / direct + fenêtre **ProposalReview** dans l'app
+- **Co-écriture live** : `ui_present` ouvre une vue DockSky depuis l'agent
+- **ChatGPT Free** : pas de MCP custom (limite OpenAI) — copier-coller JSON en V1
+- **Init IA** dans le bandeau (presse-papiers, option Cursor)
+- **Intro produit** sous le bandeau (passerelle d'aides) + overflow **Tout voir**
+- **Modules optionnels** : Pomodoro, Agenda, Routines, Gamification, Compagnon
+- **Agenda** : sync **Google Calendar** et **iCloud**
+- **Capture Knowledge** : `Ctrl+K` (panneau sous le bandeau)
+- MCP : `mcp:read` + `mcp:write` dès Free ; `mcp:synapse` (`synapse_exec`) en Pro / Équipage
+
+### Canaux
+
+- **Windows** : **Microsoft Store uniquement** (plus d'installateur `.exe` ni de zip portable pour les utilisateurs finaux)
 - **Linux** : AppImage (Velopack) + script `curl -fsSL https://docksky.fr/install.sh | bash` ; Snap en cours de publication
 - Plans Free / Équipage (code **DSK-…** à l'inscription) / offres payantes à venir
-- MCP : `https://api.docksky.fr/tda/mcp` avec scopes `mcp:read`, `mcp:write`, `mcp:synapse` (Pro / Équipage)
-- Site docksky.fr aligné (Store-only, parcours Équipage, FAQ tarifs)
+- Site docksky.fr (Store-only, parcours Équipage, FAQ tarifs, page `/mcp`)
 
 ---
 

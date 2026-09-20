@@ -124,7 +124,9 @@ Le texte généré suit un format structuré que toutes les IA comprennent :
 
 ## Via MCP : `docksky_load` (recommandé)
 
-Si tu utilises **Cursor** ou **VS Code** avec le serveur MCP DockSky, préfère **`docksky_load`** pour charger les packs de contexte (ou **`docksky_boot`** en début de session).
+Si tu utilises **Cursor** ou **VS Code** avec le serveur MCP DockSky, préfère **`docksky_boot`** en début de session puis **`docksky_load`** pour les packs.
+
+→ [Session MCP](./session-mcp)
 
 Paramètres utiles :
 - `groups` : noms de groupes Contextes IA à forcer
@@ -143,7 +145,7 @@ C'est l'équivalent programmatique du bouton **Copier JSON**, optimisé pour les
 Non. L'export est manuel, tu copies le JSON et tu le colles toi-même dans ta session IA. Rien n'est transmis sans ton action.
 
 **Puis-je utiliser ce contexte avec n'importe quelle IA ?**
-Oui. Le texte généré fonctionne avec Claude, ChatGPT, Gemini, Copilot, ou n'importe quel autre outil qui accepte du texte en entrée.
+Oui. Le texte généré fonctionne avec Claude, ChatGPT, Gemini, Copilot, ou n'importe quel autre outil qui accepte du texte en entrée. **ChatGPT Free** n'a pas de MCP live en V1 (limite OpenAI) : le JSON collé est le chemin prévu.
 
 **Que se passe-t-il si je supprime une note d'une facette ?**
 Elle est retirée de tous les groupes qui la contenaient. Le compteur de notes du groupe se met à jour au prochain export.

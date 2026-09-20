@@ -8,7 +8,9 @@ title: Corbeille IA
 Quand ton IA supprime une entrée de Facette (parce qu'elle l'a jugée obsolète, doublonnée ou remplacée), elle ne la détruit pas définitivement, elle la place en **corbeille**. Tu peux la consulter et la restaurer à tout moment.
 
 :::tip Sécurité
-L'IA ne peut supprimer des entrées de Facettes que si tu lui en as donné l'autorisation explicite dans les paramètres du projet. Sans cette autorisation, elle peut uniquement lire et créer, jamais supprimer.
+L'IA ne peut supprimer des entrées de Facettes que si tu lui en as donné l'autorisation explicite dans les paramètres. Sans cette autorisation, elle peut uniquement lire et créer, jamais supprimer.
+
+En mode **propose** / **ask**, une suppression MCP passe d'abord par **ProposalReview** (tu confirmes dans l'app). En mode **direct**, elle s'applique tout de suite si les autorisations sont là.
 :::
 
 ---
@@ -29,7 +31,7 @@ L'autorisation de suppression est réglée dans **Paramètres** (global, pas par
 Par défaut, cette autorisation est **désactivée**. L'IA peut lire et créer, mais pas envoyer en corbeille sans ton accord.
 
 :::note Accès projet
-Le projet doit aussi être en accès IA **WRITE** pour que le MCP puisse modifier ou supprimer des entrées.
+Le projet doit aussi être en accès IA **WRITE** pour que le MCP puisse modifier ou supprimer des **entrées**. Supprimer une **facette entière** (`delete_facet`) est un outil admin, avec `confirm=true` : cascade définitive, pas la corbeille.
 :::
 
 ---

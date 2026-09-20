@@ -15,7 +15,7 @@ Le bandeau est **toujours visible**, quel que soit ce que tu fais. Il est ancré
 
 Il remplit deux rôles:
 - **Capture rapide**: saisir une tâche, une idée ou un rappel sans changer de vue
-- **Information permanente**: heure, notifications en attente, session Pomodoro active
+- **Information permanente**: heure, notifications, Pomodoro, **Init IA**, overflow **Tout voir**
 
 → Voir [Bandeau permanent](../fonctionnalites/bandeau-permanent) pour le détail complet.
 
@@ -55,6 +55,7 @@ Le menu latéral donne accès à toutes les vues de DockSky. Il est organisé en
 | 🤖 **Contextes IA** | Composition de contextes pour ton IA |
 | 🗺️ **Parcours** | Timeline chronologique de ta progression |
 | 📓 **Journal** | Carnet de bord de session |
+| 🗑️ **Corbeille IA** | Notes de facettes supprimées, restaurables |
 
 ### Capture
 
@@ -82,7 +83,17 @@ DockSky propose plusieurs modes de navigation, sélectionnables depuis les param
 - **Weather** — vue épurée avec focus du jour et indicateur météo projets
 - **Zen** — vue minimaliste, distractions réduites au maximum
 
-Dans tous les modes, le bouton **⋯** donne accès à toutes les vues disponibles.
+Dans tous les modes, le bouton **⋯ Tout voir** (overflow) donne accès à toutes les vues disponibles, y compris celles masquées par le mode ou par un [module désactivé](../fonctionnalites/settings).
+
+Un **mode assistant** (aides sous le bandeau) peut te guider la première fois. Ce n'est pas un quatrième mode de navigation.
+
+---
+
+## Co-écriture IA (ProposalReview)
+
+Quand une IA connectée en MCP **propose** une écriture (mode `propose` / `ask`), l'app ouvre **ProposalReview** : tu lis le brouillon, tu amendes si besoin, tu confirmes. Rien n'est écrit dans tes données tant que tu n'as pas validé.
+
+→ [Session MCP](../integration-ia/session-mcp)
 
 ---
 
@@ -90,6 +101,7 @@ Dans tous les modes, le bouton **⋯** donne accès à toutes les vues disponibl
 
 | Raccourci | Action |
 |-----------|--------|
+| `Ctrl+K` | Capture Knowledge (panneau sous le bandeau) |
 | `Ctrl+Shift+B` | Signaler un bug sur la vue active |
 | *(configurable)* | Activer le bandeau permanent depuis n'importe quelle app |
 

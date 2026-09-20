@@ -1,0 +1,98 @@
+---
+sidebar_position: 6
+title: Session MCP (boot / load / close)
+---
+
+# Session MCP
+
+Le serveur MCP DockSky n'est pas une liste d'outils à appeler au hasard. Une session IA suit un **protocole** : démarrer, focuser, travailler, fermer.
+
+Endpoint : `POST https://api.docksky.fr/tda/mcp`  
+Auth : header **`X-AI-Token`** (pas `Authorization: Bearer`)
+
+Le catalogue évolue. Ne pas figer un nombre d'outils dans une note : la vérité est `tools/list`, et la page [docksky.fr/mcp](https://docksky.fr/mcp).
+
+---
+
+## Clients qui se branchent (MCP live)
+
+| Client | MCP DockSky |
+|--------|-------------|
+| Cursor, VS Code, Claude Desktop, Zed | Oui — URL + token |
+| **ChatGPT Free** | **Non** en V1 (limite OpenAI : pas de connecteur MCP custom) |
+
+Pour ChatGPT : [copier-coller le JSON](./configurer-son-llm). Un listing dans le directory ChatGPT n'est pas prévu tant qu'on n'a pas assez d'utilisateurs.
+
+→ Config fichier : [Synapse et MCP (Cursor)](./synapse-mcp-cursor)
+
+---
+
+## 1. Démarrer : `docksky_boot` (alias `dsk-boot`)
+
+À appeler **en premier**, sans argument.
+
+Ça charge :
+- le mode d'emploi produit et les **contrats plateforme** (`platform_rules`)
+- le **projet du bandeau** (pas le dossier Git ouvert dans l'IDE)
+- la **continuité** (où on s'était arrêtés)
+- le catalogue des packs Contextes IA (titres seulement)
+
+Puis l'agent appelle `docksky_load` pour les packs utiles, au lieu de tout dumper.
+
+---
+
+## 2. Focuser : `docksky_load` (alias `dsk-load`)
+
+En cours de session, pour charger le bon contexte :
+
+- `groups=['Backend - API']` — packs nommés
+- `task='…'` — l'API choisit les packs
+- `facets=['Intégration IA']` — une facette nommée
+
+Sans `project_id`, c'est le projet du **bandeau**. Avec `set_active=true`, le bandeau suit.
+
+L'outil historique `charge_contexte` existe encore, mais `docksky_load` est le chemin actuel.
+
+---
+
+## 3. Écrire : mode propose / ask / direct
+
+Les écritures MCP (créer une note, mettre à jour une action, etc.) sont gated par ton **`ai_write_mode`** :
+
+| Mode | Comportement |
+|------|----------------|
+| **propose** | L'IA **stage** un brouillon. Tu confirmes dans **ProposalReview** (fenêtre de l'app). |
+| **ask** | Défaut. L'IA demande une fois pour le lot : proposer, ou appliquer direct. |
+| **direct** | Applique tout de suite, y compris les suppressions. |
+
+L'outil `set_ai_write_mode` n'est jamais lui-même une proposition. Un consentement **session** (`persistence='session'`) expire ; `preference` reste dans ton compte.
+
+Quand l'IA ouvre une vue dans l'app (`ui_present`), c'est de la **co-écriture live** : tu vois le brouillon, tu valides.
+
+---
+
+## 4. Fermer : `docksky_close` (alias `dsk-close`)
+
+En fin de session, l'agent met à jour le `current_status` (où on en est) et archive le détail dans le journal.
+
+Préférer `all_projects=true` : chaque projet en accès IA **WRITE** est clos, l'un après l'autre. Les projets vraiment travaillés ont un statut précis ; les autres reçoivent un statut « pas d'activité ».
+
+Selon ton mode d'écriture, ça peut passer par **ProposalReview**.
+
+---
+
+## Init IA dans l'app
+
+Le bouton **Init IA** du bandeau copie un prompt d'amorce (`docksky_boot`) dans le presse-papiers. Option Settings (par machine) : ouvrir **Cursor** via deeplink, presse-papiers en secours.
+
+Ce n'est pas un chatbot intégré. DockSky brieffe **ton** IA.
+
+---
+
+## Ce que le MCP ne fait pas
+
+- Brancher ChatGPT Free en live
+- Exposer un lien public auto-mis à jour vers ton projet
+- Laisser l'IA supprimer des notes sans ton réglage **Autoriser l'IA à supprimer** + accès projet **WRITE** (et souvent une confirmation `ProposalReview` / `confirm=true`)
+
+→ [Partage de contexte](./partage-contexte) · [Corbeille IA](../fonctionnalites/corbeille)

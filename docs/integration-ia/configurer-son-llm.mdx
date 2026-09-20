@@ -5,7 +5,11 @@ title: Utiliser DockSky avec ton IA
 
 # Utiliser DockSky avec ton IA
 
-DockSky fonctionne avec toutes les IA du marché: Claude, ChatGPT, Gemini, Copilot, Mistral, et n'importe quel autre outil qui accepte du texte en entrée. La procédure est la même pour tous.
+DockSky fonctionne avec toutes les IA du marché: Claude, ChatGPT, Gemini, Copilot, Mistral, et n'importe quel autre outil qui accepte du texte en entrée.
+
+:::info ChatGPT en V1 = copier-coller
+**ChatGPT Free** n'autorise pas de connecteur MCP custom (limite OpenAI, pas DockSky). En V1 tu copies le JSON et tu le colles dans le chat. Le MCP live (token + URL) est pour **Claude Desktop, Cursor, VS Code, Zed**. Un listing dans le directory ChatGPT n'est pas prévu tant qu'on n'a pas assez d'utilisateurs.
+:::
 
 ---
 
@@ -47,13 +51,13 @@ Méthode 3: Lien automatique (avancé)
 
 Pour que ton IA récupère ton contexte automatiquement à chaque conversation, sans copier-coller manuel :
 
-→ Voir [Synapse et MCP (Cursor)](./synapse-mcp-cursor) (recommandé pour les devs) ou [Partage de contexte](./partage-contexte).
+→ Voir [Session MCP](./session-mcp) (protocole boot / load / close) et [Synapse et MCP (Cursor)](./synapse-mcp-cursor).
 
 ---
 
-Méthode 4: MCP DockSky (Cursor / VS Code)
+Méthode 4: MCP DockSky (Claude Desktop / Cursor / VS Code)
 
-Pour les développeurs qui utilisent **Cursor** ou **VS Code** avec une IA intégrée:
+Pour les clients qui acceptent un **connecteur MCP custom** (pas ChatGPT Free):
 
 1. Génère un token dans **Paramètres → Accès IA**
 2. Configure le serveur MCP (`https://api.docksky.fr/tda/mcp`)

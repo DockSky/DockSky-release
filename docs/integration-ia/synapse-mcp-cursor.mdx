@@ -5,7 +5,13 @@ title: Synapse et MCP (Cursor)
 
 # Synapse et MCP (Cursor / VS Code)
 
-Synapse s'utilise principalement via le **protocole MCP** (Model Context Protocol). Ton IA dans Cursor ou VS Code appelle des outils DockSky pour lister tes machines, lire les noms de secrets et **exécuter des commandes**, sans jamais recevoir les mots de passe.
+Synapse s'utilise principalement via le **protocole MCP** (Model Context Protocol). Ton IA dans Cursor, VS Code ou Claude Desktop appelle des outils DockSky pour lister tes machines, lire les noms de secrets et **exécuter des commandes**, sans jamais recevoir les mots de passe.
+
+Le protocole de session (`docksky_boot` / `load` / `close`, modes d'écriture) est décrit dans [Session MCP](./session-mcp). Cette page couvre le **branchement** et **Synapse**.
+
+:::info ChatGPT n'est pas un client MCP en V1
+**ChatGPT Free** ne permet pas d'ajouter un serveur MCP custom (limite OpenAI). Chemin V1 : [copier-coller le JSON](./configurer-son-llm). MCP live : Claude Desktop, Cursor, VS Code, Zed. Directory ChatGPT : plus tard, si assez d'utilisateurs.
+:::
 
 ---
 
@@ -82,6 +88,7 @@ Accessibles avec le token généré par défaut dans l'app :
 | `synapse_get_machine` | Détail d'une machine par slug |
 | `synapse_list_secrets` | Noms des secrets (sans valeurs) |
 | `synapse_list_audit_logs` | Journal des exécutions (limit max 200) |
+| `synapse_rtk_stats` | Tokens épargnés (compactage stdout côté API, transparent) |
 
 ### Écriture et exécution (`mcp:synapse`)
 
@@ -104,6 +111,7 @@ Requièrent le scope **`mcp:synapse`**, attribué aux comptes **Pro / Équipage*
 | `command` | Oui | Commande shell avec `{{SECRET}}` si besoin |
 | `container` | Non | Conteneur (défaut : `default_container` de la machine) |
 | `timeout_seconds` | Non | 1–300 s, défaut 30 |
+| `cwd` | Oui sur un agent | Répertoire POSIX absolu (obligatoire pour git sur `pc-fixe`, `pc-lenovo`, `vps-host`) |
 
 Exemple minimal :
 
@@ -117,6 +125,8 @@ Exemple minimal :
   }
 }
 ```
+
+Le stdout est compacté **côté API** (RTK). Tu n'as pas à préfixer `rtk` dans la commande. Si le filtre ne s'applique pas, tu reçois le stdout brut.
 
 ---
 
@@ -206,9 +216,10 @@ curl -sS -X POST 'https://api.docksky.fr/synapse/exec' \
 
 | Scope | Outils débloqués |
 |-------|------------------|
-| `mcp:read` | Contexte projet, facettes, `synapse_list_*`, lecture roadmap |
-| `mcp:write` | `update_*`, `add_*`, Knowledge, idées, facettes |
+| `mcp:read` | Contexte projet, facettes, lecture roadmap, `synapse_list_*`, `synapse_rtk_stats` |
+| `mcp:write` | `update_*`, `add_*`, Knowledge, idées, facettes, packs, `docksky_close`, `ui_present` |
 | `mcp:synapse` | `synapse_exec`, création/suppression machines et secrets |
+| `mcp:admin` | profil, settings, create/delete project, `delete_facet`, `today_dashboard` |
 
 :::info Token Pro = Synapse actif
 Avec un plan **Pro**, régénère ton token une fois si tu l'avais créé avant l'activation des scopes persistés. Tu dois voir `mcp:synapse` dans Paramètres → Accès IA, et `synapse_exec` dans `tools/list` côté Cursor.
