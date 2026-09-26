@@ -76,9 +76,14 @@ Avantage : tu sais toujours où chercher, et tu pioches dans d'autres facettes u
 
 ## Profil IA
 
-En bas du panneau droit, une zone **🧠 Profil IA** te permet de définir un texte injecté automatiquement en tête de chaque export.
+Le **Profil IA** (Paramètres, ou premier lancement via les cartes de presets) décrit *comment tu veux que l'IA collabore avec toi* : ton, rythme, contraintes, relation.
 
-C'est l'endroit pour décrire qui tu es, ton style de communication préféré, tes contraintes :
+Ce texte sert à **deux endroits** :
+
+1. **MCP** — injecté au démarrage de session dans `docksky_boot` sous la clé `user_collab` (tous les clients MCP : Cursor, Claude Desktop, etc.)
+2. **Export JSON** — placé en tête du JSON Contextes IA / Facettes (`user_profile`)
+
+Exemple :
 
 ```
 Je suis développeur solo avec un diagnostic TDA. Je préfère les réponses
@@ -86,7 +91,9 @@ directes et structurées. Pas de formules de politesse, pas de listes à
 5 niveaux. Tu peux me tutoyer.
 ```
 
-Ce profil est global (pas lié à un projet) et sauvegardé sur le serveur. Le bouton **💾 Sauvegarder** s'active dès qu'une modification est détectée.
+Ce profil est **global** (pas lié à un projet) et sauvegardé sur le serveur. Au premier lancement, des **presets** te proposent un point de départ ; tu peux le réécrire à tout moment dans Paramètres.
+
+→ Détail du boot MCP : [Session MCP](./session-mcp)
 
 ---
 

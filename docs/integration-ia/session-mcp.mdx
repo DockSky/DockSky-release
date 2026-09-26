@@ -32,12 +32,17 @@ Pour ChatGPT : [copier-coller le JSON](./configurer-son-llm). Un listing dans le
 À appeler **en premier**, sans argument.
 
 Ça charge :
-- le mode d'emploi produit et les **contrats plateforme** (`platform_rules`)
+- le mode d'emploi produit et les **contrats plateforme** (`platform_rules`) — communs à tous les utilisateurs
+- tes **préférences de collaboration** (`user_collab`) — texte du **Profil IA** (Paramètres), si tu en as un
 - le **projet du bandeau** (pas le dossier Git ouvert dans l'IDE)
 - la **continuité** (où on s'était arrêtés)
 - le catalogue des packs Contextes IA (titres seulement)
 
+`user_collab` dit à l'IA *comment te parler* (ton, rythme, règles perso). Ce n'est **pas** la même chose que `platform_rules` (contrats produit DockSky).
+
 Puis l'agent appelle `docksky_load` pour les packs utiles, au lieu de tout dumper.
+
+→ Régler le Profil IA : [Contextes IA](./contextes-ia#profil-ia) · [Paramètres](../fonctionnalites/settings)
 
 ---
 

@@ -82,7 +82,7 @@ Configuration des notifications système et des alertes:
 ## Intégration IA
 
 - **Autorisation de suppression IA** (Paramètres → Intégration IA, voir [Corbeille IA](./corbeille))
-- **Profil IA** — texte injecté en tête de chaque export de contexte
+- **Profil IA** — préférences de collaboration (ton, rythme) : injectées en MCP via `user_collab` au `docksky_boot`, et en tête des exports JSON
 - **Init IA** — client par machine : presse-papiers (défaut) ou Cursor (deeplink)
 
 Les écritures MCP suivent le mode **propose / ask / direct** (réglage compte + consentement de session). Quand c'est `propose` ou `ask`, tu confirmes dans **ProposalReview**. Détail : [Session MCP](../integration-ia/session-mcp).
