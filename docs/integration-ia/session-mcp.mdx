@@ -76,6 +76,21 @@ Quand l'IA ouvre une vue dans l'app (`ui_present`), c'est de la **co-écriture l
 
 ---
 
+## 3bis. Mode FOLLOW
+
+Pastille **FOLLOW** sur le bandeau (ou Settings → Compagnon). Quand c'est ON, `docksky_boot` expose `follow_mode.active` + un protocole court.
+
+L'IA doit alors **ancrer** le fil sur une action du projet bandeau :
+
+1. `list_steps` puis `list_actions` — choisir l'action qui cadre
+2. Si trouvée → `ui_present` (Roadmap, édition typewriter)
+3. Sinon → **proposer** `create_action` (meilleure étape) ou `create_project_task` (tâche projet sans étape)
+4. Tu valides (selon `write_mode`) ; à la fin de l'action, on recommence
+
+FOLLOW ne contourne **jamais** `write_mode`. Toggle agent : `set_follow_mode(active=true|false)`.
+
+---
+
 ## 4. Fermer : `docksky_close` (alias `dsk-close`)
 
 En fin de session, l'agent met à jour le `current_status` (où on en est) et archive le détail dans le journal.
