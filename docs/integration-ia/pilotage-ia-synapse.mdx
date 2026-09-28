@@ -54,10 +54,22 @@ Tout se configure dans **Menu Vue → Paramètres**, en bas de page :
 | **Coffre Pilotage IA** | Crée et supprime tes secrets personnels |
 | **Mes machines Synapse** | Définit où l'IA peut exécuter (slug + conteneurs) |
 | **Journal Synapse** | Affiche les 30 dernières exécutions (lecture seule) |
+| **Tokens RTK** | Totaux compactage stdout + hits acronymes (même source que `synapse_rtk_stats`) |
 
 :::info Pas de bouton « Exécuter » dans l'app
 L'exécution passe par l'IA connectée en MCP (`synapse_exec`) ou par l'API REST. L'app sert à **configurer** et **surveiller**, pas à lancer des commandes à la main.
 :::
+
+---
+
+## RTK et acronymes (en bref)
+
+Synapse ne se contente pas d'exécuter : il **économise des tokens**.
+
+1. **RTK** — après chaque commande, le serveur peut compresser le stdout avant de le renvoyer à l'IA. Transparent : tu (et l'IA) n'écrivez jamais `rtk` devant la commande.
+2. **Acronymes** — raccourcis 3 lettres (`GST` = `git status -sb`, etc.). Moins de caractères dans le prompt = moins de tokens en entrée. Dogfood : `GST` / `GLM` / `GDS`.
+
+Pour mesurer les deux d'un coup : outil MCP `synapse_rtk_stats` (champs `totals`, `aliases`, `combined`) — détail dans [Synapse et MCP](./synapse-mcp-cursor#rtk-acronymes).
 
 ---
 
@@ -90,7 +102,7 @@ Sans compte Bandeau, les sections Pilotage IA restent désactivées.
 | Page | Contenu |
 |------|---------|
 | [Secrets et machines](./synapse-secrets-et-machines) | Règles de nommage, coffre, machines, journal |
-| [Synapse et MCP](./synapse-mcp-cursor) | Configuration Cursor/VS Code, outils MCP, scopes |
+| [Synapse et MCP](./synapse-mcp-cursor) | Configuration Cursor/VS Code, outils MCP, scopes, **RTK + acronymes** |
 | [Agent distant](./synapse-agent-distant) | Machine type `agent` sur un VPS personnel (avancé) |
 
 ---

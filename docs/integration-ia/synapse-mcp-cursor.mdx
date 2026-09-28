@@ -88,7 +88,8 @@ Accessibles avec le token généré par défaut dans l'app :
 | `synapse_get_machine` | Détail d'une machine par slug |
 | `synapse_list_secrets` | Noms des secrets (sans valeurs) |
 | `synapse_list_audit_logs` | Journal des exécutions (limit max 200) |
-| `synapse_rtk_stats` | Tokens épargnés (compactage stdout côté API, transparent) |
+| `synapse_list_aliases` | Acronymes 3 lettres (GST, GLM…) + `hit_count` |
+| `synapse_rtk_stats` | Observabilité unifiée : tokens RTK + hits acronymes (voir ci-dessous) |
 
 ### Écriture et exécution (`mcp:synapse`)
 
@@ -101,14 +102,19 @@ Requièrent le scope **`mcp:synapse`**, attribué aux comptes **Pro / Équipage*
 | `synapse_delete_machine` | Supprime une machine |
 | `synapse_put_secret` | Enregistre ou met à jour un secret dans le coffre |
 | `synapse_delete_secret` | Supprime un secret du coffre |
-| `synapse_exec` | **Exécute une commande shell** |
+| `synapse_put_alias` / `synapse_delete_alias` | Gère un acronyme 3 lettres |
+| `synapse_seed_default_aliases` | Installe les raccourcis de départ (GST, GLM, GDS…) |
+| `synapse_mine_aliases` / `synapse_list_alias_suggestions` | Mine l'usage réel → suggestions |
+| `synapse_accept_alias_suggestion` / `synapse_reject_alias_suggestion` | Valide ou refuse une suggestion |
+| `synapse_exec` | **Exécute une commande shell** (ou un acronyme) |
 
 ### Paramètres de `synapse_exec`
 
 | Paramètre | Requis | Description |
 |-----------|--------|-------------|
 | `machine` | Oui | Slug de la machine (ex. `mon-vps`) |
-| `command` | Oui | Commande shell avec `{{SECRET}}` si besoin |
+| `command` | Non* | Commande shell avec `{{SECRET}}` si besoin (*ou `alias`) |
+| `alias` | Non* | Acronyme 3 lettres (ex. `GST`) — alternative à `command` |
 | `container` | Non | Conteneur (défaut : `default_container` de la machine) |
 | `timeout_seconds` | Non | 1–300 s, défaut 30 |
 | `cwd` | Oui sur un agent | Répertoire POSIX absolu (obligatoire pour git sur `pc-fixe`, `pc-lenovo`, `vps-host`) |
@@ -127,6 +133,35 @@ Exemple minimal :
 ```
 
 Le stdout est compacté **côté API** (RTK). Tu n'as pas à préfixer `rtk` dans la commande. Si le filtre ne s'applique pas, tu reçois le stdout brut.
+
+---
+
+## RTK et acronymes (observabilité) {#rtk-acronymes}
+
+Deux économies complémentaires — **une seule vérité** côté doc et MCP :
+
+| Mécanisme | Ce que ça fait | Où on le voit |
+|-----------|----------------|---------------|
+| **RTK** (Rust Token Killer) | Compacte le **stdout** après l'exec (moins de tokens renvoyés à l'IA) | Transparent ; ne jamais préfixer `rtk` |
+| **Acronymes** (GST, GLM, GDS…) | Raccourcissent le **prompt** (3 lettres au lieu de la commande longue) | `synapse_exec(alias="GST")` ou `command="GST"` |
+
+### `synapse_rtk_stats` — lecture unifiée
+
+L'outil renvoie dans **la même réponse** :
+
+- `totals` — commandes, RTK appliqué, `saved_tokens` (stdout)
+- `aliases` — `total_hits`, `hot_code`, top codes, `tokens_saved_estimate` (heuristique prompt : chars économisés ÷ 4)
+- `combined` — résumé d'un coup d'œil : `rtk_saved_tokens` + `alias_total_hits` + `alias_prompt_tokens_estimate`
+
+Paramètres : `group_by=user|day`, `days=N`, `filter_user_id` (admin).
+
+Dans **DockSky App** : Paramètres → section Synapse / tokens RTK (ligne totale + hits acronymes) ; la console **Pilotage IA** affiche aussi le tableau de bord session.
+
+### Règles à retenir
+
+- Deploy API VPS (git pull / restart) : **SSH**, pas `synapse_exec` sur l'hôte
+- Fail-open RTK : pas de filtre match → stdout brut (normal)
+- `docker ps --format '{{.Names}}'` : `{{.Names}}` n'est **pas** un secret Vault
 
 ---
 
