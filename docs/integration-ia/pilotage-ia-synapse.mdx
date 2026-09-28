@@ -69,7 +69,7 @@ Synapse ne se contente pas d'exécuter : il **économise des tokens**.
 1. **RTK** — après chaque commande, le serveur peut compresser le stdout avant de le renvoyer à l'IA. Transparent : tu (et l'IA) n'écrivez jamais `rtk` devant la commande.
 2. **Acronymes** — raccourcis 3 lettres (`GST` = `git status -sb`, etc.). Moins de caractères dans le prompt = moins de tokens en entrée. Dogfood : `GST` / `GLM` / `GDS`.
 
-Pour mesurer les deux d'un coup : outil MCP `synapse_rtk_stats` (champs `totals`, `aliases`, `combined`) — détail dans [Synapse et MCP](./synapse-mcp-cursor#rtk-acronymes).
+Pour mesurer les deux d'un coup : outil MCP `synapse_rtk_stats` (champs `totals`, `aliases`, `combined`) — détail dans [Synapse et MCP](./synapse-mcp-cursor#rtk-et-acronymes-observabilité).
 
 ---
 
