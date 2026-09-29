@@ -103,6 +103,7 @@ Requièrent le scope **`mcp:synapse`**, attribué aux comptes **Pro / Équipage*
 | `synapse_put_secret` | Enregistre ou met à jour un secret dans le coffre |
 | `synapse_delete_secret` | Supprime un secret du coffre |
 | `synapse_put_alias` / `synapse_delete_alias` | Gère un acronyme 3 lettres |
+| `synapse_rename_alias` | Change le code sans perdre l'historique d'usage |
 | `synapse_seed_default_aliases` | Installe les raccourcis de départ (GST, GLM, GDS…) |
 | `synapse_mine_aliases` / `synapse_list_alias_suggestions` | Mine l'usage réel → suggestions |
 | `synapse_accept_alias_suggestion` / `synapse_reject_alias_suggestion` | Valide ou refuse une suggestion |
@@ -113,7 +114,7 @@ Requièrent le scope **`mcp:synapse`**, attribué aux comptes **Pro / Équipage*
 | Paramètre | Requis | Description |
 |-----------|--------|-------------|
 | `machine` | Oui | Slug de la machine (ex. `mon-vps`) |
-| `command` | Non* | Commande shell avec `{{SECRET}}` si besoin (*ou `alias`) |
+| `command` | Non* | Commande shell avec `{{SECRET}}` si besoin, ou un acronyme éventuellement suivi d'arguments (`@GLM --stat`) (*ou `alias`) |
 | `alias` | Non* | Acronyme 3 lettres (ex. `GST`) — alternative à `command` |
 | `container` | Non | Conteneur (défaut : `default_container` de la machine) |
 | `timeout_seconds` | Non | 1–300 s, défaut 30 |
@@ -144,6 +145,32 @@ Deux économies complémentaires — **une seule vérité** côté doc et MCP :
 |-----------|----------------|---------------|
 | **RTK** (Rust Token Killer) | Compacte le **stdout** après l'exec (moins de tokens renvoyés à l'IA) | Transparent ; ne jamais préfixer `rtk` |
 | **Acronymes** (GST, GLM, GDS…) | Raccourcissent le **prompt** (3 lettres au lieu de la commande longue) | `synapse_exec(alias="GST")` ou `command="GST"` |
+
+### Acronymes : ce qu'il faut savoir
+
+**Passer des arguments.** Un acronyme n'est pas figé : `@GLM --stat` exécute `git log -5 --oneline --stat`. Les arguments sont ajoutés en fin de commande.
+
+Si la commande de l'alias enchaîne des étapes (`|`, `&&`, `;`), un ajout en fin changerait son sens : Synapse refuse plutôt que de produire une commande fausse. Pour ces cas, place `{}` dans la commande de l'alias pour choisir où les arguments atterrissent :
+
+```text
+synapse_put_alias(code="DBU", command="dotnet build {} -v q | tail -20")
+synapse_exec(machine="mon-vps", command="@DBU App.csproj")
+→ dotnet build App.csproj -v q | tail -20
+```
+
+Sans argument à l'appel, l'emplacement `{}` disparaît proprement.
+
+**Préfixe `@` ou pas.** Les deux marchent pour un code seul (`GST` ou `@GST`). Avec des arguments, la nuance compte : `@XYZ foo` sur un code inconnu est une **erreur franche**, alors que `XYZ foo` est traité comme une commande shell littérale. Le `@` est donc la forme à privilégier quand tu veux être sûr de viser un acronyme.
+
+**Les acronymes ne s'enchaînent pas.** La commande d'un alias ne peut pas commencer par un autre code : `synapse_put_alias(code="XYZ", command="GST")` est refusé, car `GST` serait exécuté tel quel par le shell.
+
+**Renommer plutôt que recréer.** `synapse_rename_alias(code="GPO", new_code="GPM")` conserve `hit_count` et `last_used_at`. Supprimer puis recréer repart de zéro et fausse les statistiques.
+
+**Codes suggérés.** Le mineur suit la convention des raccourcis de départ : initiales des mots utiles, complétées par une consonne du dernier mot — `git status` → `GST`, `git diff` → `GDF`, `docker ps` → `DPS`. Flags, chemins et valeurs de flags sont ignorés. En cas de collision, seule la dernière lettre change (`GST` pris → `GSA`), pour que le code reste lisible.
+
+Deux garde-fous complètent la suggestion : les codes des raccourcis de départ restent réservés même si tu ne les as pas encore installés, et une courte liste de codes malheureux n'est jamais proposée.
+
+**Comptage des hits.** Un hit est enregistré une fois la commande réellement exécutée. Un appel refusé en amont (quota dépassé, machine inconnue, `cwd` invalide) ne gonfle pas les statistiques d'adoption.
 
 ### `synapse_rtk_stats` — lecture unifiée
 
