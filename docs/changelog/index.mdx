@@ -13,6 +13,16 @@ Historique des versions de DockSky.
 
 Version courante. Téléchargements : [docksky.fr/telecharger](https://docksky.fr/telecharger) (canal officiel). Le numéro mineur suit le compteur Git de l'app (`0.9.{commits}`).
 
+### Recentrage développeurs (octobre 2026)
+
+DockSky se concentre sur ce qui le rend unique pour les développeurs : mémoire de projet, roadmap, facettes, MCP et Synapse.
+
+- **Modules optionnels coupés par défaut** pour les nouveaux comptes : Pomodoro, Agenda (et ses rappels), Routines, Journey, Gamification, Compagnon. Rien n'est supprimé : un interrupteur dans **Paramètres → Modules actifs** les rallume, avec toutes leurs données
+- **Comptes existants** : réglages conservés à l'identique ; un message unique au démarrage explique le changement
+- **Profil « Ma journée »** au premier lancement : rallume d'un coup tous les modules vie ; le profil **dev** est désormais proposé en premier
+- **IA alignée** : un module coupé disparaît aussi côté MCP (ses outils ne sont plus listés, un appel direct indique où le réactiver)
+- **Allègement** : tableau de bord, notifications (cloche), rappels et fenêtre du compagnon ne chargent plus rien pour un module coupé
+
 ### Aligné au code (septembre 2026)
 
 - **Session MCP** : `docksky_boot` / `docksky_load` / `docksky_close` (aliases `dsk-boot`, `dsk-load`, `dsk-close`) — voir [Session MCP](../integration-ia/session-mcp)
@@ -25,7 +35,7 @@ Version courante. Téléchargements : [docksky.fr/telecharger](https://docksky.f
 - **ChatGPT Free** : pas de MCP custom (limite OpenAI) — copier-coller JSON en V1
 - **Init IA** dans le bandeau (presse-papiers, option Cursor)
 - **Intro produit** sous le bandeau (passerelle d'aides) + overflow **Tout voir**
-- **Modules optionnels** : Pomodoro, Agenda, Routines, Gamification, Compagnon
+- **Modules optionnels** : Pomodoro, Agenda, Routines, Journey, Gamification, Compagnon (coupés par défaut depuis octobre 2026)
 - **Agenda** : sync **Google Calendar** et **iCloud**
 - **Capture Knowledge** : `Ctrl+K` (panneau sous le bandeau)
 - MCP : `mcp:read` + `mcp:write` dès Free ; `mcp:synapse` (`synapse_exec`) en Pro / Équipage

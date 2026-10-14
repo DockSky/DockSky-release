@@ -1,6 +1,6 @@
 name: docksky
 title: DockSky
-summary: Mémoire de projet et collaboration IA MCP pour travailleurs solo
+summary: Mémoire de projet et MCP pour les développeurs qui codent avec l'IA
 
 description: |
   Travaille avec l'IA sans tout réexpliquer à chaque session.
@@ -13,7 +13,11 @@ description: |
   • Bandeau permanent et capture instantanée : tu restes dans ton flux
   • Structure Projet → Étape → Action : continuité sur des semaines
   • Facettes et serveur MCP : contexte exact, lisible et actionnable
-  • Pour freelances, développeurs et créatifs en solo
+  • Pilotage IA Synapse : ton IA exécute des commandes sur tes machines,
+    sans jamais voir tes secrets
+  • Pensé d'abord pour les développeurs ; freelances et créatifs bienvenus
+  • Pomodoro, agenda, routines, Journey, badges, compagnon : modules
+    optionnels, coupés par défaut, à allumer dans les paramètres
 
   Particulièrement utile si tu perds le fil entre deux sessions (profils
   TDA/atypiques bienvenus, ce n'est pas le sujet principal, c'est un plus).
